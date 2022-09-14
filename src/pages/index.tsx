@@ -11,6 +11,7 @@ import step1 from "../../public/assets/consortium-steps-1.svg";
 import step2 from "../../public/assets/consortium-steps-2.svg";
 import step3 from "../../public/assets/consortium-steps-3.svg";
 import step4 from "../../public/assets/consortium-steps-4.svg";
+
 import styles from "../styles/Home.module.css";
 
 const Home: NextPage = () => {
@@ -101,6 +102,16 @@ const Home: NextPage = () => {
             />
           </div>
           <CallToAction>ESCOLHA SUA MOTO</CallToAction>
+        </section>
+
+        <section className={styles.motorcycles}>
+          <div className={styles.overlay}>
+            <h2>
+              Escolha <span>sua moto</span>
+            </h2>
+            <p>Modelos de moto para todos os gostos</p>
+            <div className={styles.waveWrapper} />
+          </div>
         </section>
       </main>
 
