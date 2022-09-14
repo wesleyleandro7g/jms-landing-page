@@ -1,0 +1,172 @@
+/* SEÇÃO 01 */
+
+.start {
+    height: 100vh;
+    width: 100%;
+    background-image: url('../../public/assets/offroad.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: left;
+}
+.start .overlay {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    height: 100%;
+    padding: 8rem;
+    position: relative;
+    background: linear-gradient(90deg, #000000 0%, rgba(0, 0, 0, 0) 100%);
+}
+.start .overlay .presentation {
+    display: flex;
+    flex-direction: column;
+}
+.start .overlay .presentation h6 {
+    font-size: larger;
+    font-style: italic;
+    font-weight: 800;
+    color: var(--primary);
+    margin-bottom: 4rem;
+}
+.start .overlay .presentation h1 {
+    font-size: 3rem;
+    line-height: 3.5rem;
+}
+.start .overlay .presentation h1 span {
+    color: var(--primary)
+}
+.start .overlay .presentation p {
+    font-size: large;
+    max-width: 600px;
+}
+.start .overlay .actionButtons {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-top: 4rem;
+}
+.start .overlay .actionButtons a {
+    text-decoration: underline;
+}
+.start .overlay .chevronWrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin-top: 4rem;
+}
+.start .overlay .chevronWrapper .chevronDown {
+    animation: chevronAnimation 1s alternate infinite;
+}
+
+@keyframes chevronAnimation {
+    from {
+        transform: translateY(20px);
+    }
+
+    to {
+        transform: translateY(0);
+    }
+}
+
+.waveWrapper {
+    width: 100%;
+    min-height: 120px;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    background-image: url('../../public/assets/wave.svg');
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+/* SEÇÃO 02 */
+
+.consortium {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    width: 100%;
+    height: 100vh;
+    gap: 2rem;
+    padding: 2rem;
+    background-color: var(--secondary);
+}
+.consortium iframe {
+    width: 600px;
+    height: 300px;
+}
+.consortium p {
+    color: var(--gray-800);
+    max-width: 600px;
+    font-size: large;
+}
+.consortium p span {
+    color: var(--primary)
+}
+
+/* SEÇÃO 03 */
+
+.howWorks {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    width: 100%;
+    height: 100vh;
+    padding: 2rem;
+    background-color: var(--secondary);
+}
+.howWorks h2 {
+    font-size: 3rem;
+    line-height: 3.2rem;
+    color: var(--black-800)
+}
+.howWorks h2 span {
+    color: var(--primary);
+}
+.howWorks p {
+    font-size: medium;
+    color: var(--black-800)
+}
+.howWorks .steps {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    margin: 4rem 0;
+}
+
+@media (max-width: 769px) {
+    .start {
+        background-position: center;
+    }
+    .start .overlay {
+        padding: 2rem;
+        background: rgba(0, 0, 0, 0.85);
+    }
+    .start .overlay .presentation {
+        gap: 1rem;
+    }
+    .start .overlay .presentation p {
+        font-size: larger;
+    }
+    .start .overlay .actionButtons {
+        width: 100%;
+        flex-direction: column;
+        margin-top: 6rem;
+    }
+    .waveWrapper {
+        display: none;
+    }
+    .consortium iframe {
+        width: 100%;
+        height: 180px;
+    }
+    .howWorks {
+        height: auto;
+    }
+}
