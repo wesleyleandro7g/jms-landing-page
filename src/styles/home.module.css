@@ -143,8 +143,7 @@
 /* SECTION 04 */
 
 .motorcycles {
-
-    height: 100vh;
+    height: auto;
     width: 100%;
     background-image: url('../../public/assets/offroad-two.jpg');
     background-size: cover;
@@ -156,10 +155,14 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    text-align: center;
     height: 100%;
-    padding: 8rem;
     position: relative;
+    padding-top: 4rem;
     background: linear-gradient(0deg, #000000 0%, rgba(0, 0, 0, 0) 116.18%);
+}
+.motorcycles .overlay .info {
+    padding: 4rem;
 }
 .motorcycles .overlay h2 {
     font-size: 3rem;
@@ -182,6 +185,16 @@
     background-image: url('../../public/assets/wave-inverted.svg');
     background-size: cover;
     background-repeat: no-repeat;
+}
+.motorcycles .overlay .motos {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    gap: 1rem;
+    padding: 0 2rem;
+}
+.motorcycles .overlay .motos more {
+    display: none;
 }
 
 @media (max-width: 769px) {
@@ -212,5 +225,20 @@
     }
     .howWorks {
         height: auto;
+    }
+    .motorcycles .overlay .info {
+        padding: 4rem 2rem;
+    }
+    .motorcycles .overlay .motos {
+       padding: 0 2rem;
+       overflow-x: scroll;
+    }
+    .motorcycles .overlay .motos more {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        height: 100vh;
+        background-color: red;
     }
 }

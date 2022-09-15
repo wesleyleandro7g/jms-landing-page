@@ -3,8 +3,11 @@ import Head from "next/head";
 import Image from "next/image";
 
 import { Footer } from "../components/footer";
-import { CallToAction } from "../components/button";
+import { CallToAction, OutlinedButton } from "../components/button";
 import { Card } from "../components/cards";
+import { MotorcycleCard } from "../components/motorcycleCard";
+
+import database from "../services/database.json";
 
 import chevronDown from "../../public/assets/chevron-down.svg";
 import step1 from "../../public/assets/consortium-steps-1.svg";
@@ -12,7 +15,7 @@ import step2 from "../../public/assets/consortium-steps-2.svg";
 import step3 from "../../public/assets/consortium-steps-3.svg";
 import step4 from "../../public/assets/consortium-steps-4.svg";
 
-import styles from "../styles/Home.module.css";
+import styles from "../styles/home.module.css";
 
 const Home: NextPage = () => {
   return (
@@ -106,10 +109,25 @@ const Home: NextPage = () => {
 
         <section className={styles.motorcycles}>
           <div className={styles.overlay}>
-            <h2>
-              Escolha <span>sua moto</span>
-            </h2>
-            <p>Modelos de moto para todos os gostos</p>
+            <div className={styles.info}>
+              <h2>
+                Escolha <span>sua moto</span>
+              </h2>
+              <p>Modelos de moto para todos os gostos</p>
+            </div>
+            <div className={styles.motos}>
+              <MotorcycleCard />
+              <MotorcycleCard />
+              <MotorcycleCard />
+              <MotorcycleCard />
+              <MotorcycleCard />
+              <div className={styles.more}>
+                <OutlinedButton>Veja todas as motos</OutlinedButton>
+              </div>
+            </div>
+            <div className={styles.info}>
+              <OutlinedButton>Veja todas as motos</OutlinedButton>
+            </div>
             <div className={styles.waveWrapper} />
           </div>
         </section>

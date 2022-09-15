@@ -115,6 +115,39 @@
                             "credito": 11424
                         }
                     ]
+                },
+                {
+                    "id": 1,
+                    "nome": "Vou de Honda Mais",
+                    "caracteristicas": [
+                        {
+                            "id": 0,
+                            "parcelas": 80,
+                            "valor": 202.35,
+                            "seguro": 4.67,
+                            "contemplacoes": 12,
+                            "documentacao": true,
+                            "credito": 11424
+                        },
+                        {
+                            "id": 1,
+                            "parcelas": 48,
+                            "valor": 325.57,
+                            "seguro": 4.70,
+                            "contemplacoes": 20,
+                            "documentacao": true,
+                            "credito": 11424
+                        },
+                        {
+                            "id": 2,
+                            "parcelas": 25,
+                            "valor": 610.16,
+                            "seguro": 4.4,
+                            "contemplacoes": 26,
+                            "documentacao": true,
+                            "credito": 11424
+                        }
+                    ]
                 }
             ]
         }
