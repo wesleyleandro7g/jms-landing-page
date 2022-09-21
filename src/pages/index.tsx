@@ -3,20 +3,25 @@ import Head from "next/head";
 import Image from "next/image";
 
 import { Footer } from "../components/footer";
-import { CallToAction, OutlinedButton } from "../components/button";
+import {
+  CallToAction,
+  OutlinedButton,
+  WhatsAppButton,
+} from "../components/button";
 import { Card } from "../components/cards";
 import { MotorcycleCard } from "../components/motorcycleCard";
+import { Accordion } from "../components/accordion";
 
 import database from "../services/database.json";
 
 import chevronDown from "../../public/assets/chevron-down.svg";
+import whatsappLogo from "../../public/assets/logo-whatsapp.svg";
 import step1 from "../../public/assets/consortium-steps-1.svg";
 import step2 from "../../public/assets/consortium-steps-2.svg";
 import step3 from "../../public/assets/consortium-steps-3.svg";
 import step4 from "../../public/assets/consortium-steps-4.svg";
 
 import styles from "../styles/home.module.css";
-import { Accordion } from "../components/accordion";
 
 const Home: NextPage = () => {
   return (
@@ -161,6 +166,17 @@ const Home: NextPage = () => {
             />
           </div>
           <CallToAction>ESCOLHA SUA MOTO</CallToAction>
+        </section>
+
+        <section className={styles.contactWrapper}>
+          <h3>Ainda com dúvidas?</h3>
+          <p>
+            Fale agora mesmo com a nossa equipe pelo WhatsApp e tire todas as
+            suas dúvidas em relação ao consórcio.
+          </p>
+          <WhatsAppButton>
+            <Image src={whatsappLogo} /> FALE COM A NOSSA EQUIPE
+          </WhatsAppButton>
         </section>
       </main>
 

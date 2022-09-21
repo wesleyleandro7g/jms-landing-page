@@ -229,6 +229,29 @@
     margin-bottom: 4rem;
 }
 
+/* SECTION 06 */
+
+.contactWrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    width: 100%;
+    padding: 8rem 2rem;
+    background-color: var(--secondary);
+}
+.contactWrapper h3 {
+    font-size: xx-large;
+    color: var(--black-800);
+}
+.contactWrapper p {
+    font-size: large;
+    color: var(--gray-800);
+    max-width: 600px;
+    margin-bottom: 4rem;
+}
+
 @media (max-width: 769px) {
     .start {
         background-position: center;

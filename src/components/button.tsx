@@ -15,3 +15,7 @@ export function CallToActionVariant(props: ButtonProps) {
 export function OutlinedButton(props: ButtonProps) {
   return <button className={styles.outlined} {...props} />;
 }
+
+export function WhatsAppButton(props: ButtonProps) {
+  return <button className={styles.whatsApp} {...props} />;
+}
