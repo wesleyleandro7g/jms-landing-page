@@ -1,6 +1,7 @@
 import type { NextPage } from "next";
 import Head from "next/head";
 import Image from "next/image";
+import Link from "next/link";
 
 import { Footer } from "../components/footer";
 import {
@@ -48,7 +49,9 @@ const Home: NextPage = () => {
             </div>
 
             <div className={styles.actionButtons}>
-              <CallToAction>ESCOLHA SUA MOTO</CallToAction>
+              <Link href="/motos">
+                <CallToAction>ESCOLHA SUA MOTO</CallToAction>
+              </Link>
               <a href="#consorcio">Saiba mais</a>
             </div>
 
@@ -77,7 +80,9 @@ const Home: NextPage = () => {
             em todo o país para oferecer suporte e atender os clientes da melhor
             forma.
           </p>
-          <CallToAction>ESCOLHA SUA MOTO</CallToAction>
+          <Link href="/motos">
+            <CallToAction>ESCOLHA SUA MOTO</CallToAction>
+          </Link>
         </section>
 
         <section className={styles.howWorks}>
@@ -111,7 +116,9 @@ const Home: NextPage = () => {
               description="Todos os participantes do grupo serão contemplados até o final do prazo escolhido."
             />
           </div>
-          <CallToAction>ESCOLHA SUA MOTO</CallToAction>
+          <Link href="/motos">
+            <CallToAction>ESCOLHA SUA MOTO</CallToAction>
+          </Link>
         </section>
 
         <section className={styles.motorcycles}>
@@ -130,7 +137,9 @@ const Home: NextPage = () => {
               <MotorcycleCard />
             </div>
             <div className={styles.info}>
-              <OutlinedButton>Veja todas as motos</OutlinedButton>
+              <Link href="/motos">
+                <OutlinedButton>Veja todas as motos</OutlinedButton>
+              </Link>
             </div>
             <div className={styles.waveWrapper} />
           </div>
@@ -154,7 +163,9 @@ const Home: NextPage = () => {
               />
             ))}
           </div>
-          <CallToAction>ESCOLHA SUA MOTO</CallToAction>
+          <Link href="/motos">
+            <CallToAction>ESCOLHA SUA MOTO</CallToAction>
+          </Link>
         </section>
 
         <section className={styles.contactWrapper}>
