@@ -13,6 +13,7 @@ import { MotorcycleCard } from "../components/motorcycleCard";
 import { Accordion } from "../components/accordion";
 
 import database from "../services/database.json";
+import questions from "../services/questions.json";
 
 import chevronDown from "../../public/assets/chevron-down.svg";
 import whatsappLogo from "../../public/assets/logo-whatsapp.svg";
@@ -144,26 +145,14 @@ const Home: NextPage = () => {
           </div>
 
           <div className={styles.accordionWrapper}>
-            <Accordion
-              id="1"
-              title="Pergunta"
-              description="Resposta da pergunta"
-            />
-            <Accordion
-              id="2"
-              title="Pergunta"
-              description="Resposta da pergunta"
-            />
-            <Accordion
-              id="3"
-              title="Pergunta"
-              description="Resposta da pergunta"
-            />
-            <Accordion
-              id="4"
-              title="Pergunta"
-              description="Resposta da pergunta"
-            />
+            {questions.map((question) => (
+              <Accordion
+                key={question.id}
+                id={question.id}
+                title={question.title}
+                description={question.description}
+              />
+            ))}
           </div>
           <CallToAction>ESCOLHA SUA MOTO</CallToAction>
         </section>

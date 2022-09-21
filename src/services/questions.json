@@ -1,0 +1,37 @@
+[
+    {
+        "id": "001",
+        "title": "As parcelas são fixas?",
+        "description": "Não. As parcelas são reajusatdas de acordo com a valorização do bem."
+    },
+    {
+        "id": "002",
+        "title": "Qual o valor médio do lance?",
+        "description": "Os valores dos lances variam de acordo com o grupo. A média de um grupo novo é de 45% de lance, mas podemos te encaixar em um grupo em andamento, buscando a média de lance que caiba no seu bolso."
+    },
+    {
+        "id": "003",
+        "title": "Quantas contemplações são realizadas por mês?",
+        "description": "São realizadas até 26 contemplações por mês."
+    },
+    {
+        "id": "004",
+        "title": "Como funciona o sorteio?",
+        "description": "A cota contemplada é extraída do resultado da loteria federal."
+    },
+    {
+        "id": "005",
+        "title": "Só pego a moto depois de pagar todas as parcelas?",
+        "description": "Não, no mês que a sua cota for contemplada, a sua moto já estará disponível para você fazer a aquisição."
+    },
+    {
+        "id": "006",
+        "title": "Posso fazer consórcio com o nome no SPC?",
+        "description": "Sim, não há nenhum impedimento."
+    },
+    {
+        "id": "007",
+        "title": "Pago no carnê ou boleto?",
+        "description": "O boleto é gerado mensalmente e enviado para você."
+    }
+]
