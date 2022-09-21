@@ -16,6 +16,7 @@ import step3 from "../../public/assets/consortium-steps-3.svg";
 import step4 from "../../public/assets/consortium-steps-4.svg";
 
 import styles from "../styles/home.module.css";
+import { Accordion } from "../components/accordion";
 
 const Home: NextPage = () => {
   return (
@@ -121,15 +122,45 @@ const Home: NextPage = () => {
               <MotorcycleCard />
               <MotorcycleCard />
               <MotorcycleCard />
-              <div className={styles.more}>
-                <OutlinedButton>Veja todas as motos</OutlinedButton>
-              </div>
             </div>
             <div className={styles.info}>
               <OutlinedButton>Veja todas as motos</OutlinedButton>
             </div>
             <div className={styles.waveWrapper} />
           </div>
+        </section>
+
+        <section className={styles.commonQuestions}>
+          <div className={styles.headerWrapper}>
+            <h2>
+              Dúvidas <span>frequentes</span>
+            </h2>
+            <p>Tem alguma dúvida?</p>
+          </div>
+
+          <div className={styles.accordionWrapper}>
+            <Accordion
+              id="1"
+              title="Pergunta"
+              description="Resposta da pergunta"
+            />
+            <Accordion
+              id="2"
+              title="Pergunta"
+              description="Resposta da pergunta"
+            />
+            <Accordion
+              id="3"
+              title="Pergunta"
+              description="Resposta da pergunta"
+            />
+            <Accordion
+              id="4"
+              title="Pergunta"
+              description="Resposta da pergunta"
+            />
+          </div>
+          <CallToAction>ESCOLHA SUA MOTO</CallToAction>
         </section>
       </main>
 
