@@ -292,4 +292,8 @@
         padding: 0;
         margin-bottom: 0.4rem;
     }
+    .contactWrapper h3 {
+        line-height: 2.2rem;
+        margin-bottom: 0.8rem;
+    }
 }
