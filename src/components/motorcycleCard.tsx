@@ -2,7 +2,7 @@ import Image from "next/image";
 
 import biz from "../../public/images/motorcycles/BIZ_110/BIZ_110_BRANCA_LATERAL.png";
 
-import { CallToActionVariant, OutlinedButton } from "./button";
+import { OutlinedButton } from "./button";
 
 import styles from "../styles/motorcycleCard.module.css";
 

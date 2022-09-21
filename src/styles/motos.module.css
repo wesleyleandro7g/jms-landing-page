@@ -1,0 +1,29 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100vh;
+   
+    background-color: var(--secondary);
+}
+.container header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 2rem;
+    background: rgba(237, 237, 237, 0.7);
+    backdrop-filter: blur(16px);
+}
+.container header h1 {
+    font-size: larger;
+    font-style: italic;
+    font-weight: 800;
+    color: var(--primary);
+}
+.container header .filterIcon {
+    cursor: pointer;
+}
+.container main {
+    padding: 2rem;
+}
