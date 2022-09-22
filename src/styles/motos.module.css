@@ -2,8 +2,6 @@
     display: flex;
     flex-direction: column;
     width: 100%;
-    height: 100vh;
-   
     background-color: var(--secondary);
 }
 .container header {
@@ -11,7 +9,10 @@
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    padding: 2rem;
+    width: 100%;
+    padding: 1rem 2rem;
+    position: fixed;
+    z-index: 99;
     background: rgba(237, 237, 237, 0.7);
     backdrop-filter: blur(16px);
 }
@@ -25,5 +26,120 @@
     cursor: pointer;
 }
 .container main {
+    display: grid;
+    flex-direction: column;
+    grid-template-columns: repeat(5, 1fr);
     padding: 2rem;
+    gap: 1rem;
+    margin-top: 3rem;
+}
+
+/* MODAL STYLES */
+
+.container h6 {
+    font-size: 1.2rem;
+    color: var(--gray-800);
+}
+.viewStyle {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+.viewStyle button {
+    border: none;
+    outline: none;
+    background-color: transparent;
+}
+.installmentValue {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+.installmentValue div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.installmentValue h5 {
+    font-size: 1.2rem;
+    padding: 0.2rem 0.6rem;
+    border-radius: 8px;
+    color: var(--white-100);
+    background-color: var(--primary-300);
+}
+.installmentValueQuantity {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+.installmentValueQuantity div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.4rem;
+    overflow: scroll;
+}
+.installmentValueQuantity div span {
+    color: black
+}
+.documentation {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+.documentation div {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 1rem
+}
+.documentation div span {
+    color: black
+}
+
+@media (max-width: 1100px) {
+    .container main {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+@media (max-width: 769px) {
+    .container main {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (max-width: 600px) {
+    .container header {
+        padding: 1rem;
+    }
+    .container main {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 0.4rem;
+        padding: 3rem 1rem;
+    }
+}
+
+
+.installmentValueQuantity input {
+    opacity: 0;
+    width: 0;
+}
+.installmentValueQuantity label {
+    display: inline-block;
+    padding: 0.2rem 1.4rem;
+    border: 1px solid #9C9B9B;
+    border-radius: 40px;
+    font-size: large;
+    color: #9C9B9B;
+    background-color: transparent;
+}
+.installmentValueQuantity input:checked + label {
+    border-color: var(--primary-300);
+    color: var(--primary-300);
+}
+.installmentValueQuantity input:focus + label {
+    border-color: var(--primary-300);
+    color: var(--primary-300);
 }
