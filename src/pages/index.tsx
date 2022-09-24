@@ -4,16 +4,11 @@ import Image from "next/image";
 import Link from "next/link";
 
 import { Footer } from "../components/footer";
-import {
-  CallToAction,
-  OutlinedButton,
-  WhatsAppButton,
-} from "../components/button";
+import * as Button from "../components/button";
 import { Card } from "../components/cards";
 import { MotorcycleCard } from "../components/motorcycleCard";
 import { Accordion } from "../components/accordion";
 
-import database from "../services/database.json";
 import questions from "../services/questions.json";
 
 import chevronDown from "../../public/assets/chevron-down.svg";
@@ -22,8 +17,6 @@ import step1 from "../../public/assets/consortium-steps-1.svg";
 import step2 from "../../public/assets/consortium-steps-2.svg";
 import step3 from "../../public/assets/consortium-steps-3.svg";
 import step4 from "../../public/assets/consortium-steps-4.svg";
-
-import styles from "../styles/home.module.css";
 
 const Home: NextPage = () => {
   return (
@@ -35,62 +28,72 @@ const Home: NextPage = () => {
       </Head>
 
       <main>
-        <section className={styles.start}>
-          <div className={styles.overlay}>
-            <div className={styles.presentation}>
-              <h6>James Moto Shop</h6>
-              <h1>
-                Consórcio Nacional <br /> <span>Honda</span>
+        <section className="w-full h-screen bg-[url('../../public/assets/offroad.jpg')] bg-cover bg-no-repeat bg-left md:bg-center">
+          <div className="flex flex-col justify-center items-start h-full p-8 md:p-32 relative bg-[#00000098] md:bg-gradient-to-r from-black to-black-10">
+            <div className="flex flex-col md:gap-4">
+              <h6 className="text-2xl italic font-bold mb-16 text-primary">
+                James Moto Shop
+              </h6>
+              <h1 className="text-5xl font-bold text-white">
+                Consórcio Nacional <br />{" "}
+                <span className="text-primary">Honda</span>
               </h1>
-              <p>
+              <p className="text-xl text-white max-w-screen-sm mt-4 md:mt-0">
                 Mais de 6 milhões de clientes já realizaram o seu sonho com o
                 Consórcio Nacional Honda. Realize você também!
               </p>
             </div>
 
-            <div className={styles.actionButtons}>
+            <div className="flex flex-col md:flex-row items-center w-full mt-16 gap-4">
               <Link href="/motos">
-                <CallToAction>ESCOLHA SUA MOTO</CallToAction>
+                <Button.CallToAction>ESCOLHA SUA MOTO</Button.CallToAction>
               </Link>
-              <a href="#consorcio">Saiba mais</a>
+              <a href="#consorcio" className="text-white underline">
+                Saiba mais
+              </a>
             </div>
 
-            <div className={styles.chevronWrapper}>
-              <a href="#consorcio" className={styles.chevronDown}>
+            <div className="flex justify-center items-center w-full mt-16">
+              <a href="#consorcio" className="animate-bounce">
                 <Image src={chevronDown} width={35} height={35} />
               </a>
             </div>
 
-            <div className={styles.waveWrapper} />
+            <div className="hidden md:block w-full h-28 absolute bottom-0 right-0 bg-[url('../../public/assets/wave.svg')] bg-cover bg-no-repeat" />
           </div>
         </section>
 
-        <section id="consorcio" className={styles.consortium}>
+        <section
+          id="consorcio"
+          className="flex flex-col justify-center items-center text-center w-full h-screen gap-8 p-8 bg-secondary"
+        >
           <iframe
             src="https://www.youtube.com/embed/LmGBsCS8g8Q"
-            title="YouTube video player"
+            title="Como funciona um consórcio"
             frameBorder="0"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
             allowFullScreen
+            className="w-full h-44 md:w-[600px] md:h-[300px]"
           />
-          <p>
-            Com <span>40 anos</span> de tradição e mais de{" "}
-            <span>6 milhões de motos Honda 0km</span> entregues, o{" "}
-            <span>Consórcio Honda</span> conta com centenas de concessionárias
-            em todo o país para oferecer suporte e atender os clientes da melhor
-            forma.
+          <p className="max-w-screen-sm text-gray-800 text-xl font-light">
+            Com <span className="text-primary">40 anos</span> de tradição e mais
+            de{" "}
+            <span className="text-primary">6 milhões de motos Honda 0km</span>{" "}
+            entregues, o <span className="text-primary">Consórcio Honda</span>{" "}
+            conta com centenas de concessionárias em todo o país para oferecer
+            suporte e atender os clientes da melhor forma.
           </p>
           <Link href="/motos">
-            <CallToAction>ESCOLHA SUA MOTO</CallToAction>
+            <Button.CallToAction>ESCOLHA SUA MOTO</Button.CallToAction>
           </Link>
         </section>
 
-        <section className={styles.howWorks}>
-          <h2>
-            Facilidade e <span>confiança</span>
+        <section className="flex flex-col justify-center items-center text-center w-full h-full md:h-screen p-8 bg-secondary">
+          <h2 className="text-5xl text-black-800 font-bold">
+            Facilidade e <span className="text-primary">confiança</span>
           </h2>
-          <p>Veja como é simples realizar o seu sonho</p>
-          <div className={styles.steps}>
+          <p className="text-base">Veja como é simples realizar o seu sonho</p>
+          <div className="flex flex-wrap gap-8 my-16 mx-0">
             <Card
               image={step1}
               title="Adquira sua cota de"
@@ -117,43 +120,47 @@ const Home: NextPage = () => {
             />
           </div>
           <Link href="/motos">
-            <CallToAction>ESCOLHA SUA MOTO</CallToAction>
+            <Button.CallToAction>ESCOLHA SUA MOTO</Button.CallToAction>
           </Link>
         </section>
 
-        <section className={styles.motorcycles}>
-          <div className={styles.overlay}>
-            <div className={styles.info}>
-              <h2>
-                Escolha <span>sua moto</span>
+        <section className="w-full md:h-full bg-[url('../../public/assets/offroad-two.jpg')] bg-cover bg-no-repeat">
+          <div className="flex flex-col justify-center items-center text-center h-full relative pt-16 bg-gradient-to-b from-[#00000010] to-[#000000]">
+            <div className="p-16">
+              <h2 className="text-5xl text-white font-bold">
+                Escolha <span className="text-primary">sua moto</span>
               </h2>
-              <p>Modelos de moto para todos os gostos</p>
+              <p className="text-base text-white">
+                Modelos de moto para todos os gostos
+              </p>
             </div>
-            <div className={styles.motos}>
+            <div className="flex w-full gap-4 px-4 py-0 overflow-x-scroll md:overflow-x-hidden">
               <MotorcycleCard />
               <MotorcycleCard />
               <MotorcycleCard />
               <MotorcycleCard />
               <MotorcycleCard />
             </div>
-            <div className={styles.info}>
+            <div className="py-16">
               <Link href="/motos">
-                <OutlinedButton>Veja todas as motos</OutlinedButton>
+                <Button.OutlinedButton>
+                  Veja todas as motos
+                </Button.OutlinedButton>
               </Link>
             </div>
-            <div className={styles.waveWrapper} />
+            <div className="hidden md:block w-full h-20 absolute top-0 right-0 bg-[url('../../public/assets/wave-inverted.svg')] bg-cover bg-no-repeat" />
           </div>
         </section>
 
-        <section className={styles.commonQuestions}>
-          <div className={styles.headerWrapper}>
-            <h2>
-              Dúvidas <span>frequentes</span>
+        <section className="flex flex-col justify-center items-center w-full px-2 py-16 bg-black">
+          <div className="text-center mb-16">
+            <h2 className="text-5xl text-white font-bold">
+              Dúvidas <span className="text-primary">frequentes</span>
             </h2>
-            <p>Tem alguma dúvida?</p>
+            <p className="text-white">Tem alguma dúvida?</p>
           </div>
 
-          <div className={styles.accordionWrapper}>
+          <div className="flex flex-col w-full gap-2 p-0 md:px-8 md:py-0 mb-2 md:mb-16">
             {questions.map((question) => (
               <Accordion
                 key={question.id}
@@ -164,19 +171,21 @@ const Home: NextPage = () => {
             ))}
           </div>
           <Link href="/motos">
-            <CallToAction>ESCOLHA SUA MOTO</CallToAction>
+            <Button.CallToAction>ESCOLHA SUA MOTO</Button.CallToAction>
           </Link>
         </section>
 
-        <section className={styles.contactWrapper}>
-          <h3>Ainda com dúvidas?</h3>
-          <p>
+        <section className="flex flex-col justify-center items-center text-center w-full px-8 py-16 bg-secondary">
+          <h3 className="text-2xl md:text-3xl text-black-800">
+            Ainda com dúvidas?
+          </h3>
+          <p className="max-w-screen-sm text-black-800 mt-4 mb-16">
             Fale agora mesmo com a nossa equipe pelo WhatsApp e tire todas as
             suas dúvidas em relação ao consórcio.
           </p>
-          <WhatsAppButton>
+          <Button.WhatsAppButton>
             <Image src={whatsappLogo} /> FALE COM A NOSSA EQUIPE
-          </WhatsAppButton>
+          </Button.WhatsAppButton>
         </section>
       </main>
 

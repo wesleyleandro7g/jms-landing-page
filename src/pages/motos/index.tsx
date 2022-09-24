@@ -2,14 +2,16 @@ import React, { useRef, useState } from "react";
 import { NextPage } from "next";
 import Image from "next/image";
 
-import { Footer } from "../components/footer";
-import { MotoSmallCard } from "../components/motoSmallCard";
-import { InputRange } from "../components/inputs";
-import Modal, { ModalHandles } from "../components/modal";
+import { Footer } from "../../components/footer";
+import { MotoSmallCard } from "../../components/motoSmallCard";
+import { InputRange, InputRadio } from "../../components/inputs";
+import Modal, { ModalHandles } from "../../components/modal";
 
-import filterIcon from "../../public/assets/filter-outline.svg";
-import line from "../../public/assets/line.svg";
-import styles from "../styles/motos.module.css";
+import { motos } from "../../services/database.json";
+
+import filterIcon from "../../../public/assets/filter-outline.svg";
+import line from "../../../public/assets/line.svg";
+import styles from "../../styles/motos.module.css";
 
 const Motorcycles: NextPage = () => {
   const modalRef = useRef<ModalHandles>(null);
@@ -64,13 +66,15 @@ const Motorcycles: NextPage = () => {
       </header>
 
       <main id="main-view">
-        <MotoSmallCard viewGridMode={viewModeGrid} />
-        <MotoSmallCard viewGridMode={viewModeGrid} />
-        <MotoSmallCard viewGridMode={viewModeGrid} />
-        <MotoSmallCard viewGridMode={viewModeGrid} />
-        <MotoSmallCard viewGridMode={viewModeGrid} />
-        <MotoSmallCard viewGridMode={viewModeGrid} />
-        <MotoSmallCard viewGridMode={viewModeGrid} />
+        {motos.map((moto) => (
+          <MotoSmallCard
+            key={moto.id}
+            name={moto.nome}
+            price={25}
+            image={moto.cores[0].images[0].src}
+            viewGridMode={viewModeGrid}
+          />
+        ))}
       </main>
 
       <Footer />
@@ -145,25 +149,18 @@ const Motorcycles: NextPage = () => {
           <h6>Número de parcelas</h6>
 
           <div>
-            <input type="radio" id="80" value="value1" name="group2" />
-            <label htmlFor="80">80x</label>
-
-            <input type="radio" id="40" value="value1" name="group2" />
-            <label htmlFor="40">40x</label>
-
-            <input type="radio" id="25" value="value1" name="group2" />
-            <label htmlFor="25">25x</label>
-
-            <input type="radio" id="12" value="value1" name="group2" />
-            <label htmlFor="12">12x</label>
+            <InputRadio id="80" value="80x" name="group2" />
+            <InputRadio id="40" value="40x" name="group2" />
+            <InputRadio id="25" value="25x" name="group2" />
+            <InputRadio id="12" value="12x" name="group2" />
           </div>
         </div>
 
         <div className={styles.documentation}>
           <h6>Documentação inclusa</h6>
           <div>
-            <span>Sim</span>
-            <span>Não</span>
+            <InputRadio id="0" value="sim" name="group3" />
+            <InputRadio id="1" value="não" name="group3" />
           </div>
         </div>
       </Modal>

@@ -13,7 +13,7 @@
     padding: 1rem 2rem;
     position: fixed;
     z-index: 99;
-    background: rgba(237, 237, 237, 0.7);
+    background: rgba(255, 255, 255, 0.7);
     backdrop-filter: blur(16px);
 }
 .container header h1 {
@@ -122,24 +122,3 @@
 }
 
 
-.installmentValueQuantity input {
-    opacity: 0;
-    width: 0;
-}
-.installmentValueQuantity label {
-    display: inline-block;
-    padding: 0.2rem 1.4rem;
-    border: 1px solid #9C9B9B;
-    border-radius: 40px;
-    font-size: large;
-    color: #9C9B9B;
-    background-color: transparent;
-}
-.installmentValueQuantity input:checked + label {
-    border-color: var(--primary-300);
-    color: var(--primary-300);
-}
-.installmentValueQuantity input:focus + label {
-    border-color: var(--primary-300);
-    color: var(--primary-300);
-}

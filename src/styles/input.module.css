@@ -88,4 +88,27 @@
 .inputRange:focus::-ms-fill-upper {
     background: #797979;
 }
-  
+
+/* INPUT RADIO */
+
+.inputRadio {
+    opacity: 0;
+    width: 0;
+}
+.label {
+    display: inline-block;
+    padding: 0.2rem 1.4rem;
+    border: 1px solid #9C9B9B;
+    border-radius: 40px;
+    font-size: large;
+    color: #9C9B9B;
+    background-color: transparent;
+}
+.inputRadio:checked + .label {
+    border-color: var(--primary-300);
+    color: var(--primary-300);
+}
+.inputRadio:focus + .label {
+    border-color: var(--primary-300);
+    color: var(--primary-300);
+}
