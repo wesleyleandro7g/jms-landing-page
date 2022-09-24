@@ -31,7 +31,7 @@ const Home: NextPage = () => {
         <section className="w-full h-screen bg-[url('../../public/assets/offroad.jpg')] bg-cover bg-no-repeat bg-left md:bg-center">
           <div className="flex flex-col justify-center items-start h-full p-8 md:p-32 relative bg-[#00000098] md:bg-gradient-to-r from-black to-black-10">
             <div className="flex flex-col md:gap-4">
-              <h6 className="text-2xl italic font-bold mb-16 text-primary">
+              <h6 className="text-xl italic font-bold mb-16 text-primary">
                 James Moto Shop
               </h6>
               <h1 className="text-5xl font-bold text-white">

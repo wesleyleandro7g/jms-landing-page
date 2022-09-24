@@ -1,7 +1,6 @@
 import Image from "next/image";
 import React from "react";
 
-import styles from "../styles/accordion.module.css";
 import arrow from "../../public/assets/arrow-red.svg";
 
 interface AccordionProps {
@@ -27,18 +26,23 @@ export function Accordion(props: AccordionProps) {
   }
 
   return (
-    <div className={styles.accordion}>
-      <div className={styles.buttonWrapper}>
-        <button onClick={toggleAccordion}>{props.title}</button>
+    <div className="w-full p-4 text-start rounded-lg duration-300 bg-black-800">
+      <div className="flex justify-between items-center">
+        <button
+          onClick={toggleAccordion}
+          className="w-full border-none outline-none text-base font-semibold text-start cursor-pointer text-white bg-transparent"
+        >
+          {props.title}
+        </button>
         <Image
           height={20}
           id={`icon-[${props.id}]`}
           src={arrow}
-          className={styles.arrowIcon}
+          className="origin-center -rotate-90 duration-300"
         />
       </div>
-      <div id={props.id} className={styles.panel}>
-        <p>{props.description}</p>
+      <div id={props.id} className="hidden bg-transparent overflow-hidden mt-4">
+        <p className="text-sm text-white md:text-base">{props.description}</p>
       </div>
     </div>
   );

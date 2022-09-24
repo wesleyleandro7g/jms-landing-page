@@ -17,6 +17,24 @@ module.exports = {
       'black-900': '#000000',
       'white-200': '#F1EEF5',
       ...colors
+    },
+    extend: {
+      keyframes: {
+        bg: {
+          '0%': {
+            'box-shadow': '0 0 0 0 rgba(255, 82, 82, 0.7)'
+          },
+          '70%': {
+            'box-shadow': '0 0 0 10px rgba(255, 82, 82, 0)'
+          },
+          '100%': {
+            'box-shadow': '0 0 0 0 rgba(255, 82, 82, 0)'
+          }
+        }
+      },
+      animation: {
+        'bg-pulse': 'bg 2s linear infinite'
+      }
     }
   },
   plugins: [],
