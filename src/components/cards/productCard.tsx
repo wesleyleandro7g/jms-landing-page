@@ -2,18 +2,18 @@ import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 
-import biz from "../../public/images/motorcycles/BIZ_110/BIZ_110_BRANCA_LATERAL.png";
+import biz from "../../../public/images/motorcycles/BIZ_110/BIZ_110_BRANCA_LATERAL.png";
 
-import styles from "../styles/motoSmallCard.module.css";
+import styles from "../../styles/motoSmallCard.module.css";
 
-interface MotoSmallCardProps {
+interface ProductCardProps {
   name: string;
   price: number;
   image: string;
   viewGridMode: boolean;
 }
 
-export function MotoSmallCard(props: MotoSmallCardProps) {
+export function ProductCard(props: ProductCardProps) {
   return (
     <Link href="motos/1">
       <div className={props.viewGridMode ? styles.container : styles.viewList}>

@@ -1,22 +1,20 @@
 import React from "react";
 
-import styles from "../styles/footer.module.css";
-
 export function Footer(): JSX.Element {
   return (
-    <footer className={styles.footer}>
-      <h1>James Moto Shop</h1>
+    <footer className="flex flex-col justify-center items-center py-16 px-0 bg-white-200">
+      <h1 className="text-xl italic font-bold text-primary">James Moto Shop</h1>
 
-      <div>
-        <a href="#" target="_blank">
+      <div className="flex flex-col justify-center items-center my-8">
+        <a href="#" target="_blank" className="text-gray-800 underline">
           Termos de uso
         </a>
-        <a href="#" target="_blank">
+        <a href="#" target="_blank" className="text-gray-800 underline">
           Políticas de privacidade
         </a>
       </div>
 
-      <h6>Copyright 2022 © James Moto Shop</h6>
+      <h6 className="text-gray-800">Copyright 2022 © James Moto Shop</h6>
     </footer>
   );
 }

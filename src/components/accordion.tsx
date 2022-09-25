@@ -30,7 +30,17 @@ export function Accordion(props: AccordionProps) {
       <div className="flex justify-between items-center">
         <button
           onClick={toggleAccordion}
-          className="w-full border-none outline-none text-base font-semibold text-start cursor-pointer text-white bg-transparent"
+          className="
+              w-full
+              border-none
+              outline-none
+              text-base
+              font-semibold
+              text-start
+              cursor-pointer
+              text-white
+              bg-transparent
+            "
         >
           {props.title}
         </button>

@@ -3,7 +3,7 @@ import { NextPage } from "next";
 import Image from "next/image";
 
 import { Footer } from "../../components/footer";
-import { MotoSmallCard } from "../../components/motoSmallCard";
+import { ProductCard } from "../../components/cards/productCard";
 import { InputRange, InputRadio } from "../../components/inputs";
 import Modal, { ModalHandles } from "../../components/modal";
 
@@ -67,7 +67,7 @@ const Motorcycles: NextPage = () => {
 
       <main id="main-view">
         {motos.map((moto) => (
-          <MotoSmallCard
+          <ProductCard
             key={moto.id}
             name={moto.nome}
             price={25}

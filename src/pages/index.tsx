@@ -4,9 +4,9 @@ import Image from "next/image";
 import Link from "next/link";
 
 import { Footer } from "../components/footer";
-import * as Button from "../components/button";
-import { Card } from "../components/cards";
-import { MotorcycleCard } from "../components/motorcycleCard";
+import { PrimaryButton } from "../components/button";
+import { InfoCard } from "../components/cards/infoCard";
+import { MotoCard } from "../components/cards/motoCard";
 import { Accordion } from "../components/accordion";
 
 import questions from "../services/questions.json";
@@ -28,8 +28,33 @@ const Home: NextPage = () => {
       </Head>
 
       <main>
-        <section className="w-full h-screen bg-[url('../../public/assets/offroad.jpg')] bg-cover bg-no-repeat bg-left md:bg-center">
-          <div className="flex flex-col justify-center items-start h-full p-8 md:p-32 relative bg-[#00000098] md:bg-gradient-to-r from-black to-black-10">
+        <section
+          className="
+            w-full
+            h-screen
+            bg-[url('../../public/assets/offroad.jpg')]
+            bg-cover
+            bg-no-repeat
+            bg-left
+            md:bg-center
+          "
+        >
+          <div
+            className="
+              flex
+              flex-col
+              justify-center
+              items-start
+              h-full
+              p-8
+              md:p-32
+              relative
+              bg-[#00000098]
+              md:bg-gradient-to-r
+              from-black
+              to-black-10
+            "
+          >
             <div className="flex flex-col md:gap-4">
               <h6 className="text-xl italic font-bold mb-16 text-primary">
                 James Moto Shop
@@ -46,7 +71,7 @@ const Home: NextPage = () => {
 
             <div className="flex flex-col md:flex-row items-center w-full mt-16 gap-4">
               <Link href="/motos">
-                <Button.CallToAction>ESCOLHA SUA MOTO</Button.CallToAction>
+                <PrimaryButton>ESCOLHA SUA MOTO</PrimaryButton>
               </Link>
               <a href="#consorcio" className="text-white underline">
                 Saiba mais
@@ -59,19 +84,43 @@ const Home: NextPage = () => {
               </a>
             </div>
 
-            <div className="hidden md:block w-full h-28 absolute bottom-0 right-0 bg-[url('../../public/assets/wave.svg')] bg-cover bg-no-repeat" />
+            <div
+              className="
+                hidden
+                md:block
+                w-full
+                h-28
+                absolute
+                bottom-0
+                right-0
+                bg-[url('../../public/assets/wave.svg')]
+                bg-cover
+                bg-no-repeat
+              "
+            />
           </div>
         </section>
 
         <section
           id="consorcio"
-          className="flex flex-col justify-center items-center text-center w-full h-screen gap-8 p-8 bg-secondary"
+          className="
+            flex
+            flex-col
+            justify-center
+            items-center
+            text-center
+            w-full
+            h-screen
+            gap-8
+            p-8
+            bg-secondary
+          "
         >
           <iframe
             src="https://www.youtube.com/embed/LmGBsCS8g8Q"
             title="Como funciona um consórcio"
             frameBorder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allow="accelerometer;autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
             allowFullScreen
             className="w-full h-44 md:w-[600px] md:h-[300px]"
           />
@@ -84,35 +133,46 @@ const Home: NextPage = () => {
             suporte e atender os clientes da melhor forma.
           </p>
           <Link href="/motos">
-            <Button.CallToAction>ESCOLHA SUA MOTO</Button.CallToAction>
+            <PrimaryButton>ESCOLHA SUA MOTO</PrimaryButton>
           </Link>
         </section>
 
-        <section className="flex flex-col justify-center items-center text-center w-full h-full md:h-screen p-8 bg-secondary">
+        <section
+          className="flex
+            flex-col
+            justify-center
+            items-center
+            text-center
+            w-full
+            h-full
+            md:h-screen
+            p-8
+            bg-secondary"
+        >
           <h2 className="text-5xl text-black-800 font-bold">
             Facilidade e <span className="text-primary">confiança</span>
           </h2>
           <p className="text-base">Veja como é simples realizar o seu sonho</p>
           <div className="flex flex-wrap gap-8 my-16 mx-0">
-            <Card
+            <InfoCard
               image={step1}
               title="Adquira sua cota de"
               titleSpan="consórcio"
               description="Temos diversos planos, com várias opções de prazos e parcelas."
             />
-            <Card
+            <InfoCard
               image={step2}
               title="Pagamento das"
               titleSpan="parcelas"
               description="Realizando o pagamento em dia, você garante a participação nas assembleias."
             />
-            <Card
+            <InfoCard
               image={step3}
               title="Participe das"
               titleSpan="assembléias"
               description="Você poderá ser contemplado por sorteio, lance fixo ou lance livre."
             />
-            <Card
+            <InfoCard
               image={step4}
               title="Todos serão"
               titleSpan="contemplados"
@@ -120,35 +180,60 @@ const Home: NextPage = () => {
             />
           </div>
           <Link href="/motos">
-            <Button.CallToAction>ESCOLHA SUA MOTO</Button.CallToAction>
+            <PrimaryButton>ESCOLHA SUA MOTO</PrimaryButton>
           </Link>
         </section>
 
         <section className="w-full md:h-full bg-[url('../../public/assets/offroad-two.jpg')] bg-cover bg-no-repeat">
-          <div className="flex flex-col justify-center items-center text-center h-full relative pt-16 bg-gradient-to-b from-[#00000010] to-[#000000]">
-            <div className="p-16">
+          <div
+            className="
+              flex
+              flex-col
+              justify-center
+              items-center
+              text-center
+              h-full
+              relative
+              md:pt-16
+              bg-gradient-to-b
+              from-[#00000010]
+              to-[#000000]
+            "
+          >
+            <div className="my-16">
               <h2 className="text-5xl text-white font-bold">
                 Escolha <span className="text-primary">sua moto</span>
               </h2>
-              <p className="text-base text-white">
+              <p className="hidden md:block text-base text-white">
                 Modelos de moto para todos os gostos
               </p>
             </div>
             <div className="flex w-full gap-4 px-4 py-0 overflow-x-scroll md:overflow-x-hidden">
-              <MotorcycleCard />
-              <MotorcycleCard />
-              <MotorcycleCard />
-              <MotorcycleCard />
-              <MotorcycleCard />
+              <MotoCard />
+              <MotoCard />
+              <MotoCard />
+              <MotoCard />
+              <MotoCard />
             </div>
-            <div className="py-16">
+            <div className="flex justify-center items-center w-full px-4 my-16">
               <Link href="/motos">
-                <Button.OutlinedButton>
-                  Veja todas as motos
-                </Button.OutlinedButton>
+                <PrimaryButton>Veja todas as motos</PrimaryButton>
               </Link>
             </div>
-            <div className="hidden md:block w-full h-20 absolute top-0 right-0 bg-[url('../../public/assets/wave-inverted.svg')] bg-cover bg-no-repeat" />
+            <div
+              className="
+                hidden
+                md:block
+                w-full
+                h-20
+                absolute
+                top-0
+                right-0
+                bg-[url('../../public/assets/wave-inverted.svg')]
+                bg-cover
+                bg-no-repeat
+              "
+            />
           </div>
         </section>
 
@@ -171,7 +256,7 @@ const Home: NextPage = () => {
             ))}
           </div>
           <Link href="/motos">
-            <Button.CallToAction>ESCOLHA SUA MOTO</Button.CallToAction>
+            <PrimaryButton>ESCOLHA SUA MOTO</PrimaryButton>
           </Link>
         </section>
 
@@ -183,9 +268,14 @@ const Home: NextPage = () => {
             Fale agora mesmo com a nossa equipe pelo WhatsApp e tire todas as
             suas dúvidas em relação ao consórcio.
           </p>
-          <Button.WhatsAppButton>
+          <PrimaryButton
+            style={{
+              backgroundColor: "#18df61",
+              boxShadow: "0px 0px 16px #18df61",
+            }}
+          >
             <Image src={whatsappLogo} /> FALE COM A NOSSA EQUIPE
-          </Button.WhatsAppButton>
+          </PrimaryButton>
         </section>
       </main>
 
