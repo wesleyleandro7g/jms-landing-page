@@ -4,8 +4,6 @@ import Link from "next/link";
 
 import biz from "../../../public/images/motorcycles/BIZ_110/BIZ_110_BRANCA_LATERAL.png";
 
-import styles from "../../styles/motoSmallCard.module.css";
-
 interface ProductCardProps {
   name: string;
   price: number;
@@ -16,17 +14,40 @@ interface ProductCardProps {
 export function ProductCard(props: ProductCardProps) {
   return (
     <Link href="motos/1">
-      <div className={props.viewGridMode ? styles.container : styles.viewList}>
-        <div className={styles.moto}>
-          <Image
-            src="https://firebasestorage.googleapis.com/v0/b/react-image-upload-28d88.appspot.com/o/images%2FBIZ_110_VERMELHA_LATERAL.png?alt=media&token=21bcd696-4bcd-45df-b73e-74eb1979e787"
-            layout="fill"
-            objectFit="contain"
-          />
+      <div
+        className={`
+          flex
+          ${props.viewGridMode && "flex-col"}
+          w-full
+          ${props.viewGridMode && "max-w-[250px]"}
+          ${props.viewGridMode ? "gap-2" : "gap-4"}
+          p-4
+          rounded-lg
+          bg-white
+          shadow-sm
+          hover:shadow-md
+        `}
+      >
+        <div
+          className={`
+            ${!props.viewGridMode && "w-2/5"}
+          `}
+        >
+          <Image src={biz} layout="responsive" objectFit="contain" />
         </div>
-        <div className={styles.info}>
-          <h1>{props.name}</h1>
-          <h3>
+        <div
+          className={`
+            flex
+            flex-col
+            ${props.viewGridMode ? "justify-center" : "justify-between"}
+            ${props.viewGridMode ? "items-center" : "items-start"}
+            ${props.viewGridMode ? "text-center" : "text-start"}
+          `}
+        >
+          <h1 className="text-base text-gray-800 font-semibold">
+            {props.name}
+          </h1>
+          <h3 className="text-xl text-gray-800 font-normal">
             {Intl.NumberFormat("pt-BR", {
               style: "currency",
               currency: "BRL",

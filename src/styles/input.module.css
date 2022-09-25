@@ -97,18 +97,21 @@
 }
 .label {
     display: inline-block;
-    padding: 0.2rem 1.4rem;
-    border: 1px solid #9C9B9B;
+    padding: 0.2rem 1.2rem;
+    border: 1.5px solid #9C9B9B;
     border-radius: 40px;
-    font-size: large;
+    font-size: medium;
+    font-weight: 500;
     color: #9C9B9B;
     background-color: transparent;
 }
 .inputRadio:checked + .label {
-    border-color: var(--primary-300);
-    color: var(--primary-300);
+    border-width: 2px;
+    border-color: #DC002D;
+    color: #DC002D;
 }
 .inputRadio:focus + .label {
-    border-color: var(--primary-300);
-    color: var(--primary-300);
+    border-width: 2px;
+    border-color: #DC002D;
+    color: #DC002D;
 }

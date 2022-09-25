@@ -7,7 +7,7 @@ import { InputRange, InputRadio } from "../../components/inputs";
 import { PrimaryButton } from "../../components/button";
 import Filter, { FilterHandles } from "../../components/filter";
 
-import { motos } from "../../services/database.json";
+import Link from "next/link";
 
 const Motorcycles: NextPage = () => {
   const modalRef = useRef<FilterHandles>(null);
@@ -51,9 +51,13 @@ const Motorcycles: NextPage = () => {
   }
 
   return (
-    <div id="container" className="flex flex-col w-full bg-secondary">
-      <header
-        className="
+    <>
+      <div
+        id="container"
+        className="flex flex-col justify-between w-full bg-secondary"
+      >
+        <header
+          className="
           flex
           justify-between
           items-center
@@ -62,54 +66,60 @@ const Motorcycles: NextPage = () => {
           fixed
           z-50
           bg-white/70
-          backdrop-blur-sm
+          backdrop-blur-md
+          shadow-sm
         "
-      >
-        <h1 className="text-xl italic font-bold text-primary">
-          James Moto Shop
-        </h1>
-        <svg
-          width="34"
-          height="34"
-          viewBox="0 0 34 34"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-          className="cursor-pointer w-7 h-7"
-          onClick={toggleModalVisible}
         >
-          <path
-            d="M2.125 9.5625H31.875M7.4375 17H26.5625M13.8125 24.4375H20.1875"
-            stroke="#CD0707"
-            stroke-width="3"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          />
-        </svg>
-      </header>
+          <Link href="/">
+            <h1 className="text-xl italic font-bold text-primary">
+              James Moto Shop
+            </h1>
+          </Link>
+          <button onClick={toggleModalVisible}>
+            <svg
+              width="34"
+              height="34"
+              viewBox="0 0 34 34"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+              className="cursor-pointer w-7 h-7"
+            >
+              <path
+                d="M2.125 9.5625H31.875M7.4375 17H26.5625M13.8125 24.4375H20.1875"
+                stroke="#CD0707"
+                stroke-width="3"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+          </button>
+        </header>
 
-      <main
-        id="main-view"
-        className="
+        <main
+          id="main-view"
+          className="
           grid
           flex-col
           grid-cols-2
+          gap-2
           md:grid-cols-5
           p-4
           mt-16
         "
-      >
-        {motos.map((moto) => (
-          <ProductCard
-            key={moto.id}
-            name={moto.nome}
-            price={25}
-            image={moto.cores[0].images[0].src}
-            viewGridMode={viewModeGrid}
-          />
-        ))}
-      </main>
+        >
+          {[0, 1, 2, 3, 4, 5, 6, 7, 8].map((index, moto) => (
+            <ProductCard
+              key={index}
+              name="Biz 110i"
+              price={230.46}
+              image=""
+              viewGridMode={viewModeGrid}
+            />
+          ))}
+        </main>
 
-      <Footer />
+        <Footer />
+      </div>
 
       <Filter ref={modalRef}>
         <div className="flex justify-between items-center w-full">
@@ -182,7 +192,7 @@ const Motorcycles: NextPage = () => {
             Número de parcelas
           </h6>
 
-          <div className="flex justify-between items-center gap-2 overflow-scroll">
+          <div className="flex justify-between items-center gap-1 overflow-scroll">
             <InputRadio id="80" value="80x" name="group2" />
             <InputRadio id="40" value="40x" name="group2" />
             <InputRadio id="25" value="25x" name="group2" />
@@ -194,17 +204,17 @@ const Motorcycles: NextPage = () => {
           <h6 className="text-lg text-gray-800 font-semibold">
             Documentação inclusa
           </h6>
-          <div className="flex justify-start items-start gap-2">
+          <div className="flex justify-start items-start gap-1">
             <InputRadio id="0" value="Sim" name="group3" />
             <InputRadio id="1" value="Não" name="group3" />
           </div>
         </div>
 
         <PrimaryButton style={{ boxShadow: "none" }}>
-          Aplicar filtros
+          <span className="font-semibold uppercase">Aplicar filtros</span>
         </PrimaryButton>
       </Filter>
-    </div>
+    </>
   );
 };
 

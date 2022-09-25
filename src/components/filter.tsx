@@ -64,22 +64,22 @@ const Filter: React.ForwardRefRenderFunction<FilterHandles, FilterProps> = (
       >
         {props.children}
       </div>
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
+      <button
+        onClick={toggleFilter}
         className="absolute z-[9999] top-2 right-2 w-10 h-10 text-white"
-        viewBox="0 0 512 512"
       >
-        <title>Close</title>
-        <path
-          fill="none"
-          stroke="currentColor"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          stroke-width="32"
-          d="M368 368L144 144M368 144L144 368"
-          onClick={toggleFilter}
-        />
-      </svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+          <title>Close</title>
+          <path
+            fill="none"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="32"
+            d="M368 368L144 144M368 144L144 368"
+          />
+        </svg>
+      </button>
     </div>
   );
 };
