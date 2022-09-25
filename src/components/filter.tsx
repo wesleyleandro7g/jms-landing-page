@@ -1,32 +1,32 @@
 import React, { forwardRef, useCallback, useImperativeHandle } from "react";
 
-export interface ModalHandles {
-  toggleModal: () => void;
+export interface FilterHandles {
+  toggleFilter: () => void;
 }
 
-interface ModalProps {
+interface FilterProps {
   children: JSX.Element | JSX.Element[];
 }
 
-const Modal: React.ForwardRefRenderFunction<ModalHandles, ModalProps> = (
+const Filter: React.ForwardRefRenderFunction<FilterHandles, FilterProps> = (
   props,
   ref
 ) => {
-  const toggleModal = useCallback(() => {
-    const modal = document.getElementById("modalFilter");
+  const toggleFilter = useCallback(() => {
+    const filter = document.getElementById("modalFilter");
 
-    if (modal) {
-      if (modal.style.display === "flex") {
-        modal.style.display = "none";
+    if (filter) {
+      if (filter.style.display === "flex") {
+        filter.style.display = "none";
       } else {
-        modal.style.display = "flex";
+        filter.style.display = "flex";
       }
     }
   }, []);
 
   useImperativeHandle(ref, () => {
     return {
-      toggleModal,
+      toggleFilter,
     };
   });
 
@@ -64,12 +64,9 @@ const Modal: React.ForwardRefRenderFunction<ModalHandles, ModalProps> = (
       >
         {props.children}
       </div>
-      <button className="absolute" onClick={toggleModal}>
-        Fechar
-      </button>
       <svg
         xmlns="http://www.w3.org/2000/svg"
-        className="absolute z-[9999] top-5 right-5 w-10 h-10 text-white"
+        className="absolute z-[9999] top-2 right-2 w-10 h-10 text-white"
         viewBox="0 0 512 512"
       >
         <title>Close</title>
@@ -80,10 +77,11 @@ const Modal: React.ForwardRefRenderFunction<ModalHandles, ModalProps> = (
           stroke-linejoin="round"
           stroke-width="32"
           d="M368 368L144 144M368 144L144 368"
+          onClick={toggleFilter}
         />
       </svg>
     </div>
   );
 };
 
-export default forwardRef(Modal);
+export default forwardRef(Filter);

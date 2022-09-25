@@ -1,27 +1,23 @@
 import React, { useRef, useState } from "react";
 import { NextPage } from "next";
-import Image from "next/image";
 
 import { Footer } from "../../components/footer";
 import { ProductCard } from "../../components/cards/productCard";
 import { InputRange, InputRadio } from "../../components/inputs";
-import Modal, { ModalHandles } from "../../components/modal";
+import { PrimaryButton } from "../../components/button";
+import Filter, { FilterHandles } from "../../components/filter";
 
 import { motos } from "../../services/database.json";
 
-import filterIcon from "../../../public/assets/filter-outline.svg";
-import line from "../../../public/assets/line.svg";
-import styles from "../../styles/motos.module.css";
-
 const Motorcycles: NextPage = () => {
-  const modalRef = useRef<ModalHandles>(null);
+  const modalRef = useRef<FilterHandles>(null);
   const [viewModeGrid, setViewModeGrid] = useState(true);
   const [rangeMinValue, setRangeMinValue] = useState(240);
   const [rangeMaxValue, setRangeMaxValue] = useState(2840);
   const [rangeValue, setRangeValue] = useState(2840);
 
   function toggleModalVisible() {
-    modalRef.current?.toggleModal();
+    modalRef.current?.toggleFilter();
   }
 
   function updateToGridViewMode() {
@@ -55,17 +51,53 @@ const Motorcycles: NextPage = () => {
   }
 
   return (
-    <div id="container" className={styles.container}>
-      <header>
-        <h1>James Moto Shop</h1>
-        <Image
-          src={filterIcon}
-          className={styles.filterIcon}
+    <div id="container" className="flex flex-col w-full bg-secondary">
+      <header
+        className="
+          flex
+          justify-between
+          items-center
+          w-full
+          p-4
+          fixed
+          z-50
+          bg-white/70
+          backdrop-blur-sm
+        "
+      >
+        <h1 className="text-xl italic font-bold text-primary">
+          James Moto Shop
+        </h1>
+        <svg
+          width="34"
+          height="34"
+          viewBox="0 0 34 34"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+          className="cursor-pointer w-7 h-7"
           onClick={toggleModalVisible}
-        />
+        >
+          <path
+            d="M2.125 9.5625H31.875M7.4375 17H26.5625M13.8125 24.4375H20.1875"
+            stroke="#CD0707"
+            stroke-width="3"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+        </svg>
       </header>
 
-      <main id="main-view">
+      <main
+        id="main-view"
+        className="
+          grid
+          flex-col
+          grid-cols-2
+          md:grid-cols-5
+          p-4
+          mt-16
+        "
+      >
         {motos.map((moto) => (
           <ProductCard
             key={moto.id}
@@ -79,10 +111,10 @@ const Motorcycles: NextPage = () => {
 
       <Footer />
 
-      <Modal ref={modalRef}>
-        <div className={styles.viewStyle}>
-          <h6>Visualização</h6>
-          <div>
+      <Filter ref={modalRef}>
+        <div className="flex justify-between items-center w-full">
+          <h6 className="text-lg text-gray-800 font-semibold">Visualização</h6>
+          <div className="flex divide-x-2">
             <button onClick={updateToGridViewMode}>
               <svg
                 width="30"
@@ -97,8 +129,6 @@ const Motorcycles: NextPage = () => {
                 />
               </svg>
             </button>
-
-            <Image src={line} />
 
             <button onClick={updateTolistViewMode}>
               <svg
@@ -125,10 +155,12 @@ const Motorcycles: NextPage = () => {
           </div>
         </div>
 
-        <div className={styles.installmentValue}>
-          <div>
-            <h6>Valor da parcela até:</h6>
-            <h5>
+        <div className="flex flex-col w-full gap-4">
+          <div className="flex justify-between items-center">
+            <h6 className="text-lg text-gray-800 font-semibold">
+              Valor da parcela até:
+            </h6>
+            <h5 className="px-2 py-1 rounded-lg text-white bg-primary-300">
               {Intl.NumberFormat("pt-BR", {
                 style: "currency",
                 currency: "BRL",
@@ -145,10 +177,12 @@ const Motorcycles: NextPage = () => {
           />
         </div>
 
-        <div className={styles.installmentValueQuantity}>
-          <h6>Número de parcelas</h6>
+        <div className="flex flex-col w-full gap-4">
+          <h6 className="text-lg text-gray-800 font-semibold">
+            Número de parcelas
+          </h6>
 
-          <div>
+          <div className="flex justify-between items-center gap-2 overflow-scroll">
             <InputRadio id="80" value="80x" name="group2" />
             <InputRadio id="40" value="40x" name="group2" />
             <InputRadio id="25" value="25x" name="group2" />
@@ -156,14 +190,20 @@ const Motorcycles: NextPage = () => {
           </div>
         </div>
 
-        <div className={styles.documentation}>
-          <h6>Documentação inclusa</h6>
-          <div>
-            <InputRadio id="0" value="sim" name="group3" />
-            <InputRadio id="1" value="não" name="group3" />
+        <div className="flex flex-col w-full gap-4">
+          <h6 className="text-lg text-gray-800 font-semibold">
+            Documentação inclusa
+          </h6>
+          <div className="flex justify-start items-start gap-2">
+            <InputRadio id="0" value="Sim" name="group3" />
+            <InputRadio id="1" value="Não" name="group3" />
           </div>
         </div>
-      </Modal>
+
+        <PrimaryButton style={{ boxShadow: "none" }}>
+          Aplicar filtros
+        </PrimaryButton>
+      </Filter>
     </div>
   );
 };
