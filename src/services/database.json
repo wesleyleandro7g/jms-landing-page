@@ -12,6 +12,7 @@
                 {
                     "id": 0,
                     "cor": "Branco",
+                    "hex": "#fff",
                     "images": [
                         {
                             "id": 0,
@@ -33,6 +34,7 @@
                 {
                     "id": 1,
                     "cor": "Cinza Metálico",
+                    "hex": "#383838",
                     "images": [
                         {
                             "id": 0,
@@ -54,6 +56,7 @@
                 {
                     "id": 2,
                     "cor": "Vermelho Perolizado",
+                    "hex": "#BC161A",
                     "images": [
                         {
                             "id": 0,
@@ -77,6 +80,7 @@
                 {
                     "id": 0,
                     "nome": "Vou de Honda",
+                    "imagem": "/planos/VoudeHonda.png",
                     "caracteristicas": [
                         {
                             "id": 0,
@@ -119,6 +123,7 @@
                 {
                     "id": 1,
                     "nome": "Vou de Honda Mais",
+                    "imagem": "/planos/VoudeHondaMais.png",
                     "caracteristicas": [
                         {
                             "id": 0,

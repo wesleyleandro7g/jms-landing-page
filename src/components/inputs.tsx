@@ -17,3 +17,16 @@ export function InputRadio(props: InputProps) {
     </>
   );
 }
+
+export function ColorSelect(props: InputProps) {
+  return (
+    <>
+      <input type="radio" className={styles.inputColor} {...props} />
+      <label
+        style={{ backgroundColor: props.color }}
+        className={styles.inputColorLabel}
+        htmlFor={props.id}
+      ></label>
+    </>
+  );
+}

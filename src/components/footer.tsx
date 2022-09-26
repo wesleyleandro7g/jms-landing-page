@@ -2,8 +2,10 @@ import React from "react";
 
 export function Footer(): JSX.Element {
   return (
-    <footer className="flex flex-col justify-center items-center py-16 px-0 bg-white-200">
-      <h1 className="text-xl italic font-bold text-primary">James Moto Shop</h1>
+    <footer className="flex flex-col justify-center items-center py-16 px-0 bg-white">
+      <h1 className="text-xl italic font-roboto font-black text-primary">
+        James Moto Shop
+      </h1>
 
       <div className="flex flex-col justify-center items-center my-8">
         <a href="#" target="_blank" className="text-gray-800 underline">

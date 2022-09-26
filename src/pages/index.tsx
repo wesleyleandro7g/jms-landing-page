@@ -56,7 +56,7 @@ const Home: NextPage = () => {
             "
           >
             <div className="flex flex-col md:gap-4">
-              <h6 className="text-xl italic font-bold mb-16 text-primary">
+              <h6 className="text-xl italic font-roboto font-black mb-16 text-primary">
                 James Moto Shop
               </h6>
               <h1 className="text-5xl font-bold text-white">

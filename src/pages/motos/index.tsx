@@ -1,13 +1,12 @@
 import React, { useRef, useState } from "react";
 import { NextPage } from "next";
+import Link from "next/link";
 
 import { Footer } from "../../components/footer";
 import { ProductCard } from "../../components/cards/productCard";
 import { InputRange, InputRadio } from "../../components/inputs";
 import { PrimaryButton } from "../../components/button";
 import Filter, { FilterHandles } from "../../components/filter";
-
-import Link from "next/link";
 
 const Motorcycles: NextPage = () => {
   const modalRef = useRef<FilterHandles>(null);
@@ -71,7 +70,7 @@ const Motorcycles: NextPage = () => {
         "
         >
           <Link href="/">
-            <h1 className="text-xl italic font-bold text-primary">
+            <h1 className="text-xl italic font-roboto font-black text-primary">
               James Moto Shop
             </h1>
           </Link>

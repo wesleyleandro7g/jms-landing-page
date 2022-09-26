@@ -18,6 +18,10 @@ module.exports = {
       'white-200': '#F1EEF5',
       ...colors
     },
+    fontFamily: {
+      'poppins': 'poppins',
+      'roboto': 'roboto',
+    },
     extend: {
       keyframes: {
         bg: {
