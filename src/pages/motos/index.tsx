@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { NextPage } from "next";
 import Link from "next/link";
 
@@ -8,12 +8,18 @@ import { InputRange, InputRadio } from "../../components/inputs";
 import { PrimaryButton } from "../../components/button";
 import Filter, { FilterHandles } from "../../components/filter";
 
+import database from "../../services/database.json";
+
+import { Plan } from "../../types/plan";
+import { Moto } from "../../types/moto";
+
 const Motorcycles: NextPage = () => {
   const modalRef = useRef<FilterHandles>(null);
   const [viewModeGrid, setViewModeGrid] = useState(true);
-  const [rangeMinValue, setRangeMinValue] = useState(240);
-  const [rangeMaxValue, setRangeMaxValue] = useState(2840);
-  const [rangeValue, setRangeValue] = useState(2840);
+  const [rangeMinValue, setRangeMinValue] = useState(0);
+  const [rangeMaxValue, setRangeMaxValue] = useState(0);
+  const [rangeValue, setRangeValue] = useState(0);
+  const [motosFiltered, setMotosFiltered] = useState(database.motos);
 
   function toggleModalVisible() {
     modalRef.current?.toggleFilter();
@@ -49,26 +55,65 @@ const Motorcycles: NextPage = () => {
     }
   }
 
+  function filterByLowerPrice(plans: Plan[]): number {
+    const values: Array<number> = [];
+
+    plans.map((item) => {
+      item.caracteristicas.map((feature) => {
+        values.push(feature.valor);
+      });
+    });
+
+    return Math.min(...values);
+  }
+
+  function getMinAndMaxPriceValue(motos: Moto[]) {
+    const values: Array<number> = [];
+
+    motos.map((moto) => {
+      moto.planos.map((plan) => {
+        plan.caracteristicas.map((feature) => {
+          values.push(feature.valor);
+        });
+      });
+    });
+
+    setRangeMinValue(Math.min(...values));
+    setRangeMaxValue(Math.max(...values));
+    setRangeValue(Math.max(...values));
+  }
+
+  function filterByRangeValue(value: number) {
+    setRangeValue(value);
+  }
+
+  function applyFilters() {
+    const dataFiltered = database.motos.filter((moto) => {
+      const motos = moto.planos.filter((plan) => {
+        const plans = plan.caracteristicas.filter(
+          (feature) => feature.valor <= rangeValue
+        );
+
+        return plans.length > 0;
+      });
+
+      return motos.length > 0;
+    });
+
+    setMotosFiltered(dataFiltered);
+  }
+
+  useEffect(() => {
+    getMinAndMaxPriceValue(motosFiltered);
+  }, []);
+
   return (
     <>
       <div
         id="container"
         className="flex flex-col justify-between w-full bg-secondary"
       >
-        <header
-          className="
-          flex
-          justify-between
-          items-center
-          w-full
-          p-4
-          fixed
-          z-50
-          bg-white/70
-          backdrop-blur-md
-          shadow-sm
-        "
-        >
+        <header className="flex justify-between items-center w-full p-4 fixed z-50 bg-white/70 backdrop-blur-md shadow-sm">
           <Link href="/">
             <h1 className="text-xl italic font-roboto font-black text-primary">
               James Moto Shop
@@ -106,11 +151,11 @@ const Motorcycles: NextPage = () => {
           mt-16
         "
         >
-          {[0, 1, 2, 3, 4, 5, 6, 7, 8].map((index, moto) => (
+          {motosFiltered.map((moto) => (
             <ProductCard
-              key={index}
-              name="Biz 110i"
-              price={230.46}
+              key={moto.id}
+              name={moto.nome}
+              price={filterByLowerPrice(moto.planos)}
               image=""
               viewGridMode={viewModeGrid}
             />
@@ -180,9 +225,9 @@ const Motorcycles: NextPage = () => {
           <InputRange
             min={rangeMinValue}
             max={rangeMaxValue}
-            step={100}
+            step={10}
             value={rangeValue}
-            onChange={(e) => setRangeValue(parseFloat(e.target.value))}
+            onChange={(e) => filterByRangeValue(parseFloat(e.target.value))}
           />
         </div>
 
@@ -209,7 +254,7 @@ const Motorcycles: NextPage = () => {
           </div>
         </div>
 
-        <PrimaryButton style={{ boxShadow: "none" }}>
+        <PrimaryButton style={{ boxShadow: "none" }} onClick={applyFilters}>
           <span className="font-semibold uppercase">Aplicar filtros</span>
         </PrimaryButton>
       </Filter>
