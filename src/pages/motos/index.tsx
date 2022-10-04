@@ -79,9 +79,11 @@ const Motorcycles: NextPage = () => {
       });
     });
 
-    setRangeMinValue(Math.min(...values));
-    setRangeMaxValue(Math.max(...values));
-    setRangeValue(Math.max(...values));
+    if (values.length > 0) {
+      setRangeMinValue(Math.min(...values));
+      setRangeMaxValue(Math.max(...values));
+      setRangeValue(Math.max(...values));
+    }
   }
 
   function renderValueFilter(value: number) {
@@ -106,6 +108,10 @@ const Motorcycles: NextPage = () => {
       'input[name="parcel"]:checked'
     ) as HTMLInputElement;
 
+    const documentation = document.querySelector(
+      'input[name="doc"]:checked'
+    ) as HTMLInputElement;
+
     const motos: Moto[] = [];
 
     database.motos.map((moto) => {
@@ -113,7 +119,16 @@ const Motorcycles: NextPage = () => {
 
       const plans = moto.planos.filter((plan) => {
         const features = plan.caracteristicas.filter((feature) => {
-          return feature.parcelas <= +parcel.value;
+          if (parcel && documentation) {
+            return (
+              feature.parcelas <= +parcel.value &&
+              feature.documentacao === (documentation.value === "true")
+            );
+          } else if (parcel) {
+            return feature.parcelas <= +parcel.value;
+          } else if (documentation) {
+            return feature.documentacao === (documentation.value === "true");
+          }
         });
 
         if (features.length > 0) {
@@ -171,15 +186,7 @@ const Motorcycles: NextPage = () => {
 
         <main
           id="main-view"
-          className="
-          grid
-          flex-col
-          grid-cols-2
-          gap-2
-          md:grid-cols-5
-          p-4
-          mt-16
-        "
+          className="grid flex-col grid-cols-2 gap-2 md:grid-cols-5 p-4 mt-16"
         >
           {motosFiltered.map((moto) => (
             <ProductCard
@@ -280,10 +287,12 @@ const Motorcycles: NextPage = () => {
           <h6 className="text-lg text-gray-800 font-semibold">
             Documentação inclusa
           </h6>
-          <div className="flex justify-start items-start gap-1">
-            <InputRadio id="Não" value="false" name="group3" />
-            <InputRadio id="Sim" value="true" name="group3" />
-          </div>
+          <form id="documentation" onChange={renderParcelFilter}>
+            <div className="flex justify-start items-start gap-1">
+              <InputRadio id="Não" value="false" name="doc" />
+              <InputRadio id="Sim" value="true" name="doc" />
+            </div>
+          </form>
         </div>
 
         <PrimaryButton
