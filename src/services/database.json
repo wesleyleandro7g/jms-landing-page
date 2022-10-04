@@ -406,27 +406,9 @@
                     {
                         "id": 1,
                         "parcelas": 48,
-                        "valor": 398.69,
+                        "valor": 1256.68,
                         "seguro": 4.31,
                         "contemplacoes": 20,
-                        "documentacao": false,
-                        "credito": 11424
-                    },
-                    {
-                        "id": 2,
-                        "parcelas": 25,
-                        "valor": 759.78,
-                        "seguro": 4.04,
-                        "contemplacoes": 26,
-                        "documentacao": false,
-                        "credito": 11424
-                    },
-                    {
-                        "id": 3,
-                        "parcelas": 12,
-                        "valor": 1256.68,
-                        "seguro": 4.01,
-                        "contemplacoes": 26,
                         "documentacao": false,
                         "credito": 11424
                     }
@@ -452,15 +434,6 @@
                         "valor": 525.57,
                         "seguro": 4.70,
                         "contemplacoes": 20,
-                        "documentacao": true,
-                        "credito": 11424
-                    },
-                    {
-                        "id": 2,
-                        "parcelas": 25,
-                        "valor": 810.16,
-                        "seguro": 4.4,
-                        "contemplacoes": 26,
                         "documentacao": true,
                         "credito": 11424
                     }

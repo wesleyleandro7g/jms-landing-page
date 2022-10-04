@@ -12,7 +12,7 @@ export function InputRadio(props: InputProps) {
     <>
       <input className={styles.inputRadio} type="radio" {...props} />
       <label className={styles.label} htmlFor={props.id}>
-        {props.value}
+        {props.id}
       </label>
     </>
   );

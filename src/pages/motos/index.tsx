@@ -20,6 +20,7 @@ const Motorcycles: NextPage = () => {
   const [rangeMaxValue, setRangeMaxValue] = useState(0);
   const [rangeValue, setRangeValue] = useState(0);
   const [motosFiltered, setMotosFiltered] = useState(database.motos);
+  const [motosFilteredAux, setMotosFilteredAux] = useState(database.motos);
 
   function toggleModalVisible() {
     modalRef.current?.toggleFilter();
@@ -55,7 +56,7 @@ const Motorcycles: NextPage = () => {
     }
   }
 
-  function filterByLowerPrice(plans: Plan[]): number {
+  function getLowerPrice(plans: Plan[]): number {
     const values: Array<number> = [];
 
     plans.map((item) => {
@@ -67,7 +68,7 @@ const Motorcycles: NextPage = () => {
     return Math.min(...values);
   }
 
-  function getMinAndMaxPriceValue(motos: Moto[]) {
+  function getMinAndMaxPrice(motos: Moto[]) {
     const values: Array<number> = [];
 
     motos.map((moto) => {
@@ -83,15 +84,11 @@ const Motorcycles: NextPage = () => {
     setRangeValue(Math.max(...values));
   }
 
-  function filterByRangeValue(value: number) {
-    setRangeValue(value);
-  }
-
-  function applyFilters() {
-    const dataFiltered = database.motos.filter((moto) => {
+  function renderValueFilter(value: number) {
+    const dataFilteredByValue = motosFilteredAux.filter((moto) => {
       const motos = moto.planos.filter((plan) => {
         const plans = plan.caracteristicas.filter(
-          (feature) => feature.valor <= rangeValue
+          (feature) => feature.valor <= value
         );
 
         return plans.length > 0;
@@ -100,11 +97,44 @@ const Motorcycles: NextPage = () => {
       return motos.length > 0;
     });
 
-    setMotosFiltered(dataFiltered);
+    setRangeValue(value);
+    setMotosFiltered(dataFilteredByValue);
+  }
+
+  function renderParcelFilter() {
+    const parcel = document.querySelector(
+      'input[name="parcel"]:checked'
+    ) as HTMLInputElement;
+
+    const motos: Moto[] = [];
+
+    database.motos.map((moto) => {
+      const planos: Plan[] = [];
+
+      const plans = moto.planos.filter((plan) => {
+        const features = plan.caracteristicas.filter((feature) => {
+          return feature.parcelas <= +parcel.value;
+        });
+
+        if (features.length > 0) {
+          planos.push({ ...plan, caracteristicas: features });
+        }
+
+        return features.length > 0;
+      });
+
+      if (plans.length > 0) {
+        motos.push({ ...moto, planos });
+      }
+    });
+
+    getMinAndMaxPrice(motos);
+    setMotosFiltered(motos);
+    setMotosFilteredAux(motos);
   }
 
   useEffect(() => {
-    getMinAndMaxPriceValue(motosFiltered);
+    getMinAndMaxPrice(database.motos);
   }, []);
 
   return (
@@ -155,7 +185,7 @@ const Motorcycles: NextPage = () => {
             <ProductCard
               key={moto.id}
               name={moto.nome}
-              price={filterByLowerPrice(moto.planos)}
+              price={getLowerPrice(moto.planos)}
               image=""
               viewGridMode={viewModeGrid}
             />
@@ -227,7 +257,7 @@ const Motorcycles: NextPage = () => {
             max={rangeMaxValue}
             step={10}
             value={rangeValue}
-            onChange={(e) => filterByRangeValue(parseFloat(e.target.value))}
+            onChange={(e) => renderValueFilter(parseFloat(e.target.value))}
           />
         </div>
 
@@ -236,12 +266,14 @@ const Motorcycles: NextPage = () => {
             Número de parcelas
           </h6>
 
-          <div className="flex justify-between items-center gap-1 overflow-scroll">
-            <InputRadio id="80" value="80x" name="group2" />
-            <InputRadio id="40" value="40x" name="group2" />
-            <InputRadio id="25" value="25x" name="group2" />
-            <InputRadio id="12" value="12x" name="group2" />
-          </div>
+          <form id="parcels" onChange={renderParcelFilter}>
+            <div className="flex justify-between items-center gap-1 overflow-scroll">
+              <InputRadio id="12x" value={12} name="parcel" />
+              <InputRadio id="25x" value={25} name="parcel" />
+              <InputRadio id="48x" value={48} name="parcel" />
+              <InputRadio id="80x" value={80} name="parcel" />
+            </div>
+          </form>
         </div>
 
         <div className="flex flex-col w-full gap-4">
@@ -249,12 +281,15 @@ const Motorcycles: NextPage = () => {
             Documentação inclusa
           </h6>
           <div className="flex justify-start items-start gap-1">
-            <InputRadio id="0" value="Sim" name="group3" />
-            <InputRadio id="1" value="Não" name="group3" />
+            <InputRadio id="Não" value="false" name="group3" />
+            <InputRadio id="Sim" value="true" name="group3" />
           </div>
         </div>
 
-        <PrimaryButton style={{ boxShadow: "none" }} onClick={applyFilters}>
+        <PrimaryButton
+          style={{ boxShadow: "none" }}
+          onClick={toggleModalVisible}
+        >
           <span className="font-semibold uppercase">Aplicar filtros</span>
         </PrimaryButton>
       </Filter>
