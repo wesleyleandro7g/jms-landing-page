@@ -1,12 +1,14 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState, useContext } from "react";
 import { NextPage } from "next";
 import Link from "next/link";
+import { useRouter } from "next/router";
 
 import { Footer } from "../../components/footer";
 import { ProductCard } from "../../components/cards/productCard";
 import { InputRange, InputRadio } from "../../components/inputs";
 import { PrimaryButton } from "../../components/button";
 import Filter, { FilterHandles } from "../../components/filter";
+import { PurchaseContext } from "../../contexts/purchaseContext";
 
 import database from "../../services/database.json";
 
@@ -15,10 +17,15 @@ import { Moto } from "../../types/moto";
 
 const Motorcycles: NextPage = () => {
   const modalRef = useRef<FilterHandles>(null);
+  const { setProductSelected } = useContext(PurchaseContext);
+  const router = useRouter();
+
   const [viewModeGrid, setViewModeGrid] = useState(true);
   const [rangeMinValue, setRangeMinValue] = useState(0);
   const [rangeMaxValue, setRangeMaxValue] = useState(0);
   const [rangeValue, setRangeValue] = useState(0);
+  const [parcels, setParcels] = useState<number>(80);
+  const [documentation, setDocumentation] = useState<boolean>(false);
   const [motosFiltered, setMotosFiltered] = useState(database.motos);
   const [motosFilteredAux, setMotosFilteredAux] = useState(database.motos);
 
@@ -120,13 +127,20 @@ const Motorcycles: NextPage = () => {
       const plans = moto.planos.filter((plan) => {
         const features = plan.caracteristicas.filter((feature) => {
           if (parcel && documentation) {
+            setParcels(+parcel.value);
+            setDocumentation(documentation.value === "true");
+
             return (
               feature.parcelas <= +parcel.value &&
               feature.documentacao === (documentation.value === "true")
             );
           } else if (parcel) {
+            setParcels(+parcel.value);
+
             return feature.parcelas <= +parcel.value;
           } else if (documentation) {
+            setDocumentation(documentation.value === "true");
+
             return feature.documentacao === (documentation.value === "true");
           }
         });
@@ -148,6 +162,17 @@ const Motorcycles: NextPage = () => {
     setMotosFilteredAux(motos);
   }
 
+  function navigateToProduct(moto: Moto) {
+    setProductSelected({
+      id: moto.id,
+      parcels: parcels,
+      documentation: documentation,
+      value: getLowerPrice(moto.planos),
+    });
+
+    router.push(`/motos/${moto.id}`);
+  }
+
   useEffect(() => {
     getMinAndMaxPrice(database.motos);
   }, []);
@@ -156,7 +181,7 @@ const Motorcycles: NextPage = () => {
     <>
       <div
         id="container"
-        className="flex flex-col justify-between w-full bg-secondary"
+        className="flex flex-col justify-between w-full min-h-[150vh] bg-secondary"
       >
         <header className="flex justify-between items-center w-full p-4 fixed z-50 bg-white/70 backdrop-blur-md shadow-sm">
           <Link href="/">
@@ -191,10 +216,12 @@ const Motorcycles: NextPage = () => {
           {motosFiltered.map((moto) => (
             <ProductCard
               key={moto.id}
+              id={moto.id}
               name={moto.nome}
               price={getLowerPrice(moto.planos)}
               image=""
               viewGridMode={viewModeGrid}
+              navigate={() => navigateToProduct(moto)}
             />
           ))}
         </main>

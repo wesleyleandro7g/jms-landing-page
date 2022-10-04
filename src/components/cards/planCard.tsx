@@ -30,10 +30,10 @@ export function PlanCard() {
         <h6 className="text-lg text-gray-800 font-light">Número de parcelas</h6>
 
         <div className="flex justify-between items-center gap-1 overflow-scroll">
-          <InputRadio id="80" value="80x" name="group2" />
-          <InputRadio id="40" value="40x" name="group2" />
-          <InputRadio id="25" value="25x" name="group2" />
-          <InputRadio id="12" value="12x" name="group2" />
+          <InputRadio id="80x" value="80" name="group2" />
+          <InputRadio id="48x" value="48" name="group2" />
+          <InputRadio id="25x" value="25" name="group2" />
+          <InputRadio id="12x" value="12" name="group2" />
         </div>
       </div>
 

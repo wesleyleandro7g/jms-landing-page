@@ -1,12 +1,15 @@
+import React, { useContext, useEffect, useState } from "react";
 import { NextPage } from "next";
 import Link from "next/link";
 import Image from "next/image";
+import { useRouter } from "next/router";
 
 import { ColorSelect } from "../../components/inputs";
 import { Footer } from "../../components/footer";
 import { PlanCard } from "../../components/cards/planCard";
+import { PurchaseContext } from "../../contexts/purchaseContext";
 
-import data from "../../services/database.json";
+import database from "../../services/database.json";
 import biz from "../../../public/images/motorcycles/BIZ_110/BIZ_110_BRANCA_LATERAL.png";
 import motor from "../../../public/assets/motor.svg";
 import cilindrada from "../../../public/assets/cilindrada.svg";
@@ -14,7 +17,22 @@ import transmissao from "../../../public/assets/transmissao.svg";
 import partida from "../../../public/assets/partida.svg";
 import freios from "../../../public/assets/freios.svg";
 
+import { Moto } from "../../types/moto";
+
+interface QueryRouterProps {
+  id?: string;
+}
+
 const MotorcycleDetails: NextPage = () => {
+  const router = useRouter();
+  const { productSelected } = useContext(PurchaseContext);
+  const { id }: QueryRouterProps = router.query;
+  const [data, setData] = useState<Moto>();
+
+  useEffect(() => {
+    setData(database.motos.find((moto) => moto.id === parseInt(id || "0")));
+  }, []);
+
   return (
     <div className="flex flex-col justify-between w-full overflow-scroll h-screen bg-secondary">
       <header className="flex justify-start space-x-6 items-center p-4 bg-white shadow-sm">
@@ -46,16 +64,14 @@ const MotorcycleDetails: NextPage = () => {
           <Image
             src={biz}
             layout="responsive"
-            alt={`Imagem da motocicleta ${data.motos[0].nome}`}
+            alt={`Imagem da motocicleta ${data?.nome}`}
           />
         </div>
 
         <div className="flex flex-col justify-center items-center text-center py-8 px-4">
-          <h1 className="text-gray-800 text-2xl font-semibold">
-            {data.motos[0].nome}
-          </h1>
+          <h1 className="text-gray-800 text-2xl font-semibold">{data?.nome}</h1>
           <div className="space-x-1 py-4">
-            {data.motos[0].cores.map((cor) => (
+            {data?.cores.map((cor) => (
               <ColorSelect
                 key={cor.id}
                 id={cor.cor}
@@ -77,9 +93,7 @@ const MotorcycleDetails: NextPage = () => {
               />
             </div>
             <h3 className="text-lg text-gray-800 font-bold mt-4">Motor</h3>
-            <p className="text-base text-gray-800 leading-5">
-              {data.motos[0].motor}
-            </p>
+            <p className="text-base text-gray-800 leading-5">{data?.motor}</p>
           </div>
 
           <div className="flex flex-col items-center text-center">
@@ -92,7 +106,7 @@ const MotorcycleDetails: NextPage = () => {
             </div>
             <h3 className="text-lg text-gray-800 font-bold mt-4">Cilindrada</h3>
             <p className="text-base text-gray-800 leading-5">
-              {data.motos[0].cilindrada}
+              {data?.cilindrada}
             </p>
           </div>
 
@@ -108,7 +122,7 @@ const MotorcycleDetails: NextPage = () => {
               Transmissão
             </h3>
             <p className="text-base text-gray-800 leading-5">
-              {data.motos[0].transmissao}
+              {data?.transmissao}
             </p>
           </div>
 
@@ -123,9 +137,7 @@ const MotorcycleDetails: NextPage = () => {
             <h3 className="text-lg text-gray-800 font-bold mt-4">
               Sistema de Partida
             </h3>
-            <p className="text-base text-gray-800 leading-5">
-              {data.motos[0].partida}
-            </p>
+            <p className="text-base text-gray-800 leading-5">{data?.partida}</p>
           </div>
 
           <div className="flex flex-col items-center text-center">
@@ -137,9 +149,7 @@ const MotorcycleDetails: NextPage = () => {
               />
             </div>
             <h3 className="text-lg text-gray-800 font-bold mt-4">Freios</h3>
-            <p className="text-base text-gray-800 leading-5">
-              {data.motos[0].freios}
-            </p>
+            <p className="text-base text-gray-800 leading-5">{data?.freios}</p>
           </div>
         </div>
 
@@ -167,7 +177,7 @@ const MotorcycleDetails: NextPage = () => {
             uppercase
           "
         >
-          Adquira por 155 por mês
+          Adquira por {productSelected.value} por mês
         </button>
       </main>
 
