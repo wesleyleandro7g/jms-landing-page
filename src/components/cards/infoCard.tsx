@@ -32,7 +32,7 @@ export function InfoCard(props: InfoCardProps) {
         gap-4
       "
     >
-      <Image src={props.image} />
+      <Image src={props.image} alt="ícone informativo" />
       <h3 className="text-lg font-semibold text-black-800 leading-5">
         {props.title} <span className="text-primary">{props.titleSpan}</span>
       </h3>

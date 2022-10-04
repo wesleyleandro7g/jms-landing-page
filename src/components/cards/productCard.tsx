@@ -33,7 +33,12 @@ export function ProductCard(props: ProductCardProps) {
             ${!props.viewGridMode && "w-2/5"}
           `}
         >
-          <Image src={biz} layout="responsive" objectFit="contain" />
+          <Image
+            src={biz}
+            layout="responsive"
+            objectFit="contain"
+            alt={`Imagem da motocicleta ${props.name}`}
+          />
         </div>
         <div
           className={`

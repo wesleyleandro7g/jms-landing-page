@@ -19,7 +19,11 @@ export function PlanCard() {
       "
     >
       <div className="w-1/2">
-        <Image src={planImage} layout="responsive" />
+        <Image
+          src={planImage}
+          layout="responsive"
+          alt="Imagem ilustrativa do plano"
+        />
       </div>
 
       <div className="flex flex-col w-full gap-4">

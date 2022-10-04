@@ -6,7 +6,7 @@ import { ColorSelect } from "../../components/inputs";
 import { Footer } from "../../components/footer";
 import { PlanCard } from "../../components/cards/planCard";
 
-import { motos } from "../../services/database.json";
+import data from "../../services/database.json";
 import biz from "../../../public/images/motorcycles/BIZ_110/BIZ_110_BRANCA_LATERAL.png";
 import motor from "../../../public/assets/motor.svg";
 import cilindrada from "../../../public/assets/cilindrada.svg";
@@ -43,16 +43,21 @@ const MotorcycleDetails: NextPage = () => {
 
       <main className="py-4 relative">
         <div className="px-4">
-          <Image src={biz} layout="responsive" />
+          <Image
+            src={biz}
+            layout="responsive"
+            alt={`Imagem da motocicleta ${data.motos[0].nome}`}
+          />
         </div>
 
         <div className="flex flex-col justify-center items-center text-center py-8 px-4">
           <h1 className="text-gray-800 text-2xl font-semibold">
-            {motos[0].nome}
+            {data.motos[0].nome}
           </h1>
           <div className="space-x-1 py-4">
-            {motos[0].cores.map((cor) => (
+            {data.motos[0].cores.map((cor) => (
               <ColorSelect
+                key={cor.id}
                 id={cor.cor}
                 value={cor.cor}
                 color={cor.hex}
@@ -65,55 +70,75 @@ const MotorcycleDetails: NextPage = () => {
         <div className="space-y-16 px-4">
           <div className="flex flex-col items-center text-center">
             <div className="w-1/2">
-              <Image src={motor} layout="responsive" />
+              <Image
+                src={motor}
+                layout="responsive"
+                alt="Ícone ilustrando um motor"
+              />
             </div>
             <h3 className="text-lg text-gray-800 font-bold mt-4">Motor</h3>
             <p className="text-base text-gray-800 leading-5">
-              {motos[0].motor}
+              {data.motos[0].motor}
             </p>
           </div>
 
           <div className="flex flex-col items-center text-center">
             <div className="w-1/2">
-              <Image src={cilindrada} layout="responsive" />
+              <Image
+                src={cilindrada}
+                layout="responsive"
+                alt="Ícone ilustrando as cilindradas da moto"
+              />
             </div>
             <h3 className="text-lg text-gray-800 font-bold mt-4">Cilindrada</h3>
             <p className="text-base text-gray-800 leading-5">
-              {motos[0].cilindrada}
+              {data.motos[0].cilindrada}
             </p>
           </div>
 
           <div className="flex flex-col items-center text-center">
             <div className="w-1/2">
-              <Image src={transmissao} layout="responsive" />
+              <Image
+                src={transmissao}
+                layout="responsive"
+                alt="Ícone ilustrando a transmissão da moto"
+              />
             </div>
             <h3 className="text-lg text-gray-800 font-bold mt-4">
               Transmissão
             </h3>
             <p className="text-base text-gray-800 leading-5">
-              {motos[0].transmissao}
+              {data.motos[0].transmissao}
             </p>
           </div>
 
           <div className="flex flex-col items-center text-center">
             <div className="w-1/2">
-              <Image src={partida} layout="responsive" />
+              <Image
+                src={partida}
+                layout="responsive"
+                alt="Ícone ilustrando o tipo de partida da moto"
+              />
             </div>
             <h3 className="text-lg text-gray-800 font-bold mt-4">
               Sistema de Partida
             </h3>
             <p className="text-base text-gray-800 leading-5">
-              {motos[0].partida}
+              {data.motos[0].partida}
             </p>
           </div>
 
           <div className="flex flex-col items-center text-center">
             <div className="w-1/2">
-              <Image src={freios} layout="responsive" />
+              <Image
+                src={freios}
+                layout="responsive"
+                alt="Ícone ilustrando o tipo de freios da moto"
+              />
             </div>
             <h3 className="text-lg text-gray-800 font-bold mt-4">Freios</h3>
             <p className="text-base text-gray-800 leading-5">
-              {motos[0].freios}
+              {data.motos[0].freios}
             </p>
           </div>
         </div>

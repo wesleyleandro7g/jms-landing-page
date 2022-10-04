@@ -48,6 +48,7 @@ export function Accordion(props: AccordionProps) {
           height={20}
           id={`icon-[${props.id}]`}
           src={arrow}
+          alt="arrow-icon"
           className="origin-center -rotate-90 duration-300"
         />
       </div>

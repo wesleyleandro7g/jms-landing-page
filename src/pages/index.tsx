@@ -80,7 +80,12 @@ const Home: NextPage = () => {
 
             <div className="flex justify-center items-center w-full mt-16">
               <a href="#consorcio" className="animate-bounce">
-                <Image src={chevronDown} width={35} height={35} />
+                <Image
+                  src={chevronDown}
+                  width={35}
+                  height={35}
+                  alt="Ìcone ilustrativo"
+                />
               </a>
             </div>
 
@@ -274,7 +279,8 @@ const Home: NextPage = () => {
               boxShadow: "0px 0px 16px #18df61",
             }}
           >
-            <Image src={whatsappLogo} /> FALE COM A NOSSA EQUIPE
+            <Image src={whatsappLogo} alt="Logo do whatsapp" /> FALE COM A NOSSA
+            EQUIPE
           </PrimaryButton>
         </section>
       </main>
