@@ -29,6 +29,7 @@ const MotorcycleDetails: NextPage = () => {
   const { id }: QueryRouterProps = router.query;
   const [data, setData] = useState<Moto>();
   const [colorSelected, setColorSelected] = useState(0);
+  const [index, setIndex] = useState(1);
 
   function handerChangeColor() {
     const color = document.querySelector(
@@ -36,6 +37,20 @@ const MotorcycleDetails: NextPage = () => {
     ) as HTMLInputElement;
 
     setColorSelected(parseInt(color.value));
+  }
+
+  function handlePrev() {
+    const nextIndex = index - 1;
+
+    if (nextIndex < 0) {
+      // setIndex(images.length - 1);
+    } else {
+      setIndex(nextIndex);
+    }
+  }
+
+  function handleNext() {
+    // setIndex((index + 1) % images.length);
   }
 
   useEffect(() => {
@@ -162,10 +177,55 @@ const MotorcycleDetails: NextPage = () => {
           <h2 className="text-3xl text-center text-black-800 font-bold">
             Nossos <span className="text-primary">Planos</span>
           </h2>
-          <div className="flex overflow-scroll gap-4 px-4">
-            {data?.planos.map((plan) => (
-              <PlanCard key={plan.id} plan={plan} />
-            ))}
+          <div className="flex justify-center relative px-4">
+            <PlanCard key={data?.planos[0].id} plan={data?.planos[0]} />
+
+            <button
+              type="button"
+              className="flex absolute top-0 left-0 z-30 justify-center items-center px-4 h-full cursor-pointer group focus:outline-none"
+              onClick={handlePrev}
+            >
+              <span className="inline-flex justify-center items-center w-8 h-8 rounded-full sm:w-10 sm:h-10 bg-primary group-focus:ring-2 group-focus:ring-primary/50 group-focus:outline-none">
+                <svg
+                  className="w-5 h-5 text-white sm:w-6 sm:h-6 dark:text-gray-800"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M15 19l-7-7 7-7"
+                  ></path>
+                </svg>
+                <span className="hidden">Previous</span>
+              </span>
+            </button>
+            <button
+              type="button"
+              className="flex absolute top-0 right-0 z-30 justify-center items-center px-4 h-full cursor-pointer group outline-none"
+              onClick={handleNext}
+            >
+              <span className="inline-flex justify-center items-center w-8 h-8 rounded-full sm:w-10 sm:h-10 bg-primary group-focus:ring-2 group-focus:ring-primary/50 group-focus:outline-none">
+                <svg
+                  className="w-5 h-5 text-white sm:w-6 sm:h-6 "
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M9 5l7 7-7 7"
+                  ></path>
+                </svg>
+                <span className="hidden">Next</span>
+              </span>
+            </button>
           </div>
         </div>
 

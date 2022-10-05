@@ -103,12 +103,14 @@
     font-size: medium;
     font-weight: 500;
     color: #9C9B9B;
+    text-align: center;
     background-color: transparent;
 }
 .inputRadio:checked + .label {
     border-width: 2px;
     border-color: #DC002D;
     color: #DC002D;
+    
 }
 .inputRadio:focus + .label {
     border-width: 2px;
