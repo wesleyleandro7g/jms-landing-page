@@ -227,7 +227,7 @@ const Motorcycles: NextPage = () => {
                 id={moto.id}
                 name={moto.nome}
                 price={getLowerPrice(moto.planos)}
-                image={moto.cores[0].images[0].src}
+                image={moto.cores[0].images[0]}
                 viewGridMode={viewModeGrid}
                 navigate={() => navigateToProduct(moto)}
               />

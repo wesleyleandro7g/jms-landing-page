@@ -8,9 +8,9 @@ import { ColorSelect } from "../../components/inputs";
 import { Footer } from "../../components/footer";
 import { PlanCard } from "../../components/cards/planCard";
 import { PurchaseContext } from "../../contexts/purchaseContext";
+import Carousel from "../../components/carousel";
 
-import database from "../../services/database.json";
-import biz from "../../../public/images/motorcycles/BIZ_110/BIZ_110_BRANCA_LATERAL.png";
+import { motos } from "../../services/database";
 import motor from "../../../public/assets/motor.svg";
 import cilindrada from "../../../public/assets/cilindrada.svg";
 import transmissao from "../../../public/assets/transmissao.svg";
@@ -28,10 +28,19 @@ const MotorcycleDetails: NextPage = () => {
   const { productSelected } = useContext(PurchaseContext);
   const { id }: QueryRouterProps = router.query;
   const [data, setData] = useState<Moto>();
+  const [colorSelected, setColorSelected] = useState(0);
+
+  function handerChangeColor() {
+    const color = document.querySelector(
+      'input[name="color"]:checked'
+    ) as HTMLInputElement;
+
+    setColorSelected(parseInt(color.value));
+  }
 
   useEffect(() => {
-    setData(database.motos.find((moto) => moto.id === parseInt(id || "0")));
-  }, []);
+    setData(motos.find((moto) => moto.id === parseInt(id || "0")));
+  }, [id]);
 
   return (
     <div className="flex flex-col justify-between w-full overflow-scroll h-screen bg-secondary">
@@ -60,27 +69,23 @@ const MotorcycleDetails: NextPage = () => {
       </header>
 
       <main className="py-4 relative">
-        <div className="px-4">
-          <Image
-            src={biz}
-            layout="responsive"
-            alt={`Imagem da motocicleta ${data?.nome}`}
-          />
-        </div>
+        <Carousel images={data?.cores[colorSelected].images || []} />
 
         <div className="flex flex-col justify-center items-center text-center py-8 px-4">
           <h1 className="text-gray-800 text-2xl font-semibold">{data?.nome}</h1>
-          <div className="space-x-1 py-4">
-            {data?.cores.map((cor) => (
-              <ColorSelect
-                key={cor.id}
-                id={cor.cor}
-                value={cor.cor}
-                color={cor.hex}
-                name="colors"
-              />
-            ))}
-          </div>
+          <form onChange={handerChangeColor}>
+            <div className="space-x-1 py-4">
+              {data?.cores.map((cor) => (
+                <ColorSelect
+                  key={cor.id}
+                  id={cor.cor}
+                  value={cor.id}
+                  color={cor.hex}
+                  name="color"
+                />
+              ))}
+            </div>
+          </form>
         </div>
 
         <div className="space-y-16 px-4">

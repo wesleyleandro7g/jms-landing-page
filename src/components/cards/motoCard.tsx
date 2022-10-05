@@ -1,6 +1,6 @@
 import Image from "next/image";
 
-import biz from "../../../public/images/motorcycles/BIZ_110/BIZ_110_BRANCA_LATERAL.png";
+import biz from "../../../public/images/motos/BIZ_110/BIZ_110_BRANCA_LA.png";
 
 import { PrimaryButton } from "../button";
 
