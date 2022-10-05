@@ -1,4 +1,7 @@
 import { Moto } from "../types/moto";
+import VoudeHonda from "/public/images/planos/VoudeHonda.png";
+import VoudeHondaMais from "/public/images/planos/VoudeHondaMais.png";
+
 import BIZ_110_BRANCA_LA from "/public/images/motos/BIZ_110/BIZ_110_BRANCA_LA.png";
 import BIZ_110_BRANCA_FD from "/public/images/motos/BIZ_110/BIZ_110_BRANCA_FD.png";
 import BIZ_110_BRANCA_TD from "/public/images/motos/BIZ_110/BIZ_110_BRANCA_TD.png";
@@ -42,11 +45,12 @@ export const motos: Moto[] = [
       {
         id: 0,
         nome: "Vou de Honda",
-        imagem: "/planos/VoudeHonda.png",
+        imagem: VoudeHonda,
         caracteristicas: [
           {
             id: 0,
             parcelas: 80,
+            label: "80x",
             valor: 185.64,
             seguro: 4.29,
             contemplacoes: 12,
@@ -56,6 +60,7 @@ export const motos: Moto[] = [
           {
             id: 1,
             parcelas: 48,
+            label: "48x",
             valor: 298.69,
             seguro: 4.31,
             contemplacoes: 20,
@@ -65,6 +70,7 @@ export const motos: Moto[] = [
           {
             id: 2,
             parcelas: 25,
+            label: "25x",
             valor: 559.78,
             seguro: 4.04,
             contemplacoes: 26,
@@ -74,6 +80,7 @@ export const motos: Moto[] = [
           {
             id: 3,
             parcelas: 12,
+            label: "12x",
             valor: 1156.68,
             seguro: 4.01,
             contemplacoes: 26,
@@ -85,11 +92,12 @@ export const motos: Moto[] = [
       {
         id: 1,
         nome: "Vou de Honda Mais",
-        imagem: "/planos/VoudeHondaMais.png",
+        imagem: VoudeHondaMais,
         caracteristicas: [
           {
             id: 0,
             parcelas: 80,
+            label: "80x",
             valor: 202.35,
             seguro: 4.67,
             contemplacoes: 12,
@@ -99,6 +107,7 @@ export const motos: Moto[] = [
           {
             id: 1,
             parcelas: 48,
+            label: "48x",
             valor: 325.57,
             seguro: 4.7,
             contemplacoes: 20,
@@ -108,6 +117,7 @@ export const motos: Moto[] = [
           {
             id: 2,
             parcelas: 25,
+            label: "25x",
             valor: 610.16,
             seguro: 4.4,
             contemplacoes: 26,

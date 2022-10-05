@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
-import { NextPage } from "next";
 import Link from "next/link";
 import Image from "next/image";
+import { NextPage } from "next";
 import { useRouter } from "next/router";
 
 import { ColorSelect } from "../../components/inputs";
@@ -17,7 +17,7 @@ import transmissao from "../../../public/assets/transmissao.svg";
 import partida from "../../../public/assets/partida.svg";
 import freios from "../../../public/assets/freios.svg";
 
-import { Moto } from "../../types/moto";
+import type { Moto } from "../../types/moto";
 
 interface QueryRouterProps {
   id?: string;
@@ -163,25 +163,13 @@ const MotorcycleDetails: NextPage = () => {
             Nossos <span className="text-primary">Planos</span>
           </h2>
           <div className="flex overflow-scroll gap-4 px-4">
-            <PlanCard />
-            <PlanCard />
+            {data?.planos.map((plan) => (
+              <PlanCard key={plan.id} plan={plan} />
+            ))}
           </div>
         </div>
 
-        <button
-          className="
-            fixed
-            left-0
-            bottom-0
-            w-full
-            py-4
-            bg-primary
-            text-white
-            text-lg
-            font-semibold
-            uppercase
-          "
-        >
+        <button className="fixed left-0 bottom-0 w-full py-4 bg-primary text-white text-lg font-semibold uppercase">
           Adquira por {productSelected.value} por mês
         </button>
       </main>
