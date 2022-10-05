@@ -1,13 +1,11 @@
 import React from "react";
-import Image from "next/image";
-
-import biz from "../../../public/images/motorcycles/BIZ_110/BIZ_110_BRANCA_LATERAL.png";
+import Image, { StaticImageData } from "next/image";
 
 interface ProductCardProps {
   id: number;
   name: string;
   price: number;
-  image: string;
+  image: string | StaticImageData;
   viewGridMode: boolean;
   navigate: () => void;
 }
@@ -31,12 +29,12 @@ export function ProductCard(props: ProductCardProps) {
     >
       <div
         className={`
-            ${!props.viewGridMode && "w-2/5"}
+            ${!props.viewGridMode && "w-2/5"} w-full h-24 relative
           `}
       >
         <Image
-          src={biz}
-          layout="responsive"
+          src={props.image}
+          layout="fill"
           objectFit="contain"
           alt={`Imagem da motocicleta ${props.name}`}
         />
