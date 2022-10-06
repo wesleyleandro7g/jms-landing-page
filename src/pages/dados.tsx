@@ -1,6 +1,7 @@
 import { NextPage } from "next";
 import Link from "next/link";
 import Image from "next/image";
+import { useRouter } from "next/router";
 import { FormHelpers } from "@unform/core";
 import { Form } from "@unform/web";
 
@@ -11,10 +12,13 @@ import { PrimaryButton } from "../components/button";
 import biz from "../../public/images/motos/BIZ_110/BIZ_110_BRANCA_LA.png";
 
 const CostumerData: NextPage = () => {
+  const router = useRouter();
+
   function handleSubmit(data: FormData, { reset }: FormHelpers) {
     console.log(data);
 
     reset();
+    router.push("/pagamento");
   }
 
   return (
@@ -81,6 +85,7 @@ const CostumerData: NextPage = () => {
               />
             </div>
             <PrimaryButton
+              type="submit"
               style={{
                 boxShadow: "",
                 textTransform: "uppercase",
