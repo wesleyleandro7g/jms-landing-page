@@ -313,7 +313,9 @@ const Motorcycles: NextPage = () => {
             <div className="flex justify-between items-center gap-1 overflow-scroll">
               <InputRadio id="12x" value={12} name="parcel" />
               <InputRadio id="25x" value={25} name="parcel" />
+              <InputRadio id="36x" value={36} name="parcel" />
               <InputRadio id="48x" value={48} name="parcel" />
+              <InputRadio id="60x" value={60} name="parcel" />
               <InputRadio id="80x" value={80} name="parcel" />
             </div>
           </form>
