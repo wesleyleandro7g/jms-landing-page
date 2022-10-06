@@ -1,4 +1,5 @@
 import type { Moto } from "../../types/moto";
+
 import VoudeHonda from "/public/images/planos/VoudeHonda.png";
 import VoudeHondaMais from "/public/images/planos/VoudeHondaMais.png";
 
