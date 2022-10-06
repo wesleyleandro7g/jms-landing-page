@@ -13,7 +13,7 @@ export function PrimaryButton(props: ButtonProps) {
         md:w-auto
         rounded-lg
         md:px-10
-        py-3
+        py-4
         border-none
         cursor-pointer
         bg-primary

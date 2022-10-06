@@ -1,7 +1,12 @@
+import React, { useContext } from "react";
 import type { NextPage } from "next";
 import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/router";
+
+import type { Moto } from "../types/moto";
+import type { Plan } from "../types/plan";
 
 import { Footer } from "../components/footer";
 import { PrimaryButton } from "../components/button";
@@ -10,6 +15,8 @@ import { MotoCard } from "../components/cards/motoCard";
 import { Accordion } from "../components/accordion";
 
 import questions from "../services/questions.json";
+import { motos } from "../services/database";
+import { PurchaseContext } from "../contexts/purchaseContext";
 
 import chevronDown from "../../public/assets/chevron-down.svg";
 import whatsappLogo from "../../public/assets/logo-whatsapp.svg";
@@ -19,6 +26,32 @@ import step3 from "../../public/assets/consortium-steps-3.svg";
 import step4 from "../../public/assets/consortium-steps-4.svg";
 
 const Home: NextPage = () => {
+  const router = useRouter();
+  const { setProductSelected } = useContext(PurchaseContext);
+
+  function getLowerPrice(plans: Plan[]): number {
+    const values: Array<number> = [];
+
+    plans.map((item) => {
+      item.caracteristicas.map((feature) => {
+        values.push(feature.valor);
+      });
+    });
+
+    return Math.min(...values);
+  }
+
+  function navigateToProduct(moto: Moto) {
+    setProductSelected({
+      id: moto.id,
+      parcels: 80,
+      documentation: false,
+      value: getLowerPrice(moto.planos),
+    });
+
+    router.push(`/motos/${moto.id}`);
+  }
+
   return (
     <div>
       <Head>
@@ -28,35 +61,10 @@ const Home: NextPage = () => {
       </Head>
 
       <main>
-        <section
-          className="
-            w-full
-            h-screen
-            bg-[url('../../public/assets/offroad.jpg')]
-            bg-cover
-            bg-no-repeat
-            bg-left
-            md:bg-center
-          "
-        >
-          <div
-            className="
-              flex
-              flex-col
-              justify-center
-              items-start
-              h-full
-              p-8
-              md:p-32
-              relative
-              bg-[#00000098]
-              md:bg-gradient-to-r
-              from-black
-              to-black-10
-            "
-          >
+        <section className="w-full h-screen bg-[url('../../public/assets/offroad.jpg')] bg-cover bg-no-repeat bg-left md:bg-center">
+          <div className="flex flex-col ustify-center items-start h-full p-8 md:p-32 relative bg-[#00000098] md:bg-gradient-to-r from-black to-black-10">
             <div className="flex flex-col md:gap-4">
-              <h6 className="text-xl italic font-roboto font-black mb-16 text-primary">
+              <h6 className="text-xl italic font-roboto font-black mb-16 text-white">
                 James Moto Shop
               </h6>
               <h1 className="text-5xl font-bold text-white">
@@ -89,37 +97,13 @@ const Home: NextPage = () => {
               </a>
             </div>
 
-            <div
-              className="
-                hidden
-                md:block
-                w-full
-                h-28
-                absolute
-                bottom-0
-                right-0
-                bg-[url('../../public/assets/wave.svg')]
-                bg-cover
-                bg-no-repeat
-              "
-            />
+            <div className="hidden md:block w-full h-28 absolute bottom-0 right-0 bg-[url('../../public/assets/wave.svg')] bg-cover bg-no-repeat" />
           </div>
         </section>
 
         <section
           id="consorcio"
-          className="
-            flex
-            flex-col
-            justify-center
-            items-center
-            text-center
-            w-full
-            h-screen
-            gap-8
-            p-8
-            bg-secondary
-          "
+          className="flex flex-col justify-center items-center text-center w-full h-screen gap-8 p-8 bg-secondary"
         >
           <iframe
             src="https://www.youtube.com/embed/LmGBsCS8g8Q"
@@ -142,18 +126,7 @@ const Home: NextPage = () => {
           </Link>
         </section>
 
-        <section
-          className="flex
-            flex-col
-            justify-center
-            items-center
-            text-center
-            w-full
-            h-full
-            md:h-screen
-            p-8
-            bg-secondary"
-        >
+        <section className="flex flex-col justify-center items-center text-center w-full h-full md:h-screen p-8 bg-secondary">
           <h2 className="text-5xl text-black-800 font-bold">
             Facilidade e <span className="text-primary">confiança</span>
           </h2>
@@ -190,21 +163,7 @@ const Home: NextPage = () => {
         </section>
 
         <section className="w-full md:h-full bg-[url('../../public/assets/offroad-two.jpg')] bg-cover bg-no-repeat">
-          <div
-            className="
-              flex
-              flex-col
-              justify-center
-              items-center
-              text-center
-              h-full
-              relative
-              md:pt-16
-              bg-gradient-to-b
-              from-[#00000010]
-              to-[#000000]
-            "
-          >
+          <div className="flex flex-col justify-center items-center text-center h-full relative md:pt-16 bg-gradient-to-b from-[#00000010] to-[#000000]">
             <div className="my-16">
               <h2 className="text-5xl text-white font-bold">
                 Escolha <span className="text-primary">sua moto</span>
@@ -214,31 +173,23 @@ const Home: NextPage = () => {
               </p>
             </div>
             <div className="flex w-full gap-4 px-4 py-0 overflow-x-scroll md:overflow-x-hidden">
-              <MotoCard />
-              <MotoCard />
-              <MotoCard />
-              <MotoCard />
-              <MotoCard />
+              {motos.slice(0, 5).map((moto) => (
+                <MotoCard
+                  key={moto.id}
+                  id={moto.id}
+                  name={moto.nome}
+                  value={getLowerPrice(moto.planos)}
+                  image={moto.cores[0].images[0]}
+                  onClick={() => navigateToProduct(moto)}
+                />
+              ))}
             </div>
             <div className="flex justify-center items-center w-full px-4 my-16">
               <Link href="/motos">
                 <PrimaryButton>Veja todas as motos</PrimaryButton>
               </Link>
             </div>
-            <div
-              className="
-                hidden
-                md:block
-                w-full
-                h-20
-                absolute
-                top-0
-                right-0
-                bg-[url('../../public/assets/wave-inverted.svg')]
-                bg-cover
-                bg-no-repeat
-              "
-            />
+            <div className="hidden md:block w-full h-20 absolute top-0 right-0 bg-[url('../../public/assets/wave-inverted.svg')] bg-cover bg-no-repeat" />
           </div>
         </section>
 
