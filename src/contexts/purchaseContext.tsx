@@ -15,6 +15,8 @@ interface ProductProps {
   documentation?: boolean;
   color?: string;
   value?: number;
+  planId?: number;
+  featuresId?: number;
 }
 
 interface PurchaseContextInterface {
@@ -28,13 +30,7 @@ export const PurchaseContext = createContext<PurchaseContextInterface>({
 });
 
 const PurchaseProvider: React.FC<PurchaseProviderProps> = ({ children }) => {
-  const [productSelected, setProductSelected] = useState<ProductProps>({
-    id: 0,
-    color: "#fff",
-    documentation: false,
-    parcels: 80,
-    value: 0,
-  });
+  const [productSelected, setProductSelected] = useState({} as ProductProps);
 
   return (
     <PurchaseContext.Provider value={{ productSelected, setProductSelected }}>

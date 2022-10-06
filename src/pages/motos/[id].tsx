@@ -25,13 +25,13 @@ interface QueryRouterProps {
 
 const MotorcycleDetails: NextPage = () => {
   const router = useRouter();
-  const { productSelected } = useContext(PurchaseContext);
+  const { productSelected, setProductSelected } = useContext(PurchaseContext);
   const { id }: QueryRouterProps = router.query;
   const [data, setData] = useState<Moto>();
   const [colorSelected, setColorSelected] = useState(0);
   const [planIndex, setPlanIndex] = useState(0);
 
-  function handerChangeColor() {
+  function handleChangeColor() {
     const color = document.querySelector(
       'input[name="color"]:checked'
     ) as HTMLInputElement;
@@ -39,18 +39,58 @@ const MotorcycleDetails: NextPage = () => {
     setColorSelected(parseInt(color.value));
   }
 
-  function handlePrev() {
+  function handlePrevPlan() {
     const nextIndex = planIndex - 1;
 
     if (nextIndex < 0 && data?.planos) {
+      const planAux = data?.planos[data?.planos.length - 1];
+
+      const featureAux = planAux.caracteristicas.find((feature) => {
+        return feature.parcelas === (productSelected.parcels || 80);
+      });
+
+      setProductSelected({
+        ...productSelected,
+        value: featureAux?.valor,
+        planId: planAux.id,
+        featuresId: featureAux?.id,
+        documentation: featureAux?.documentacao,
+      });
+
       setPlanIndex(data?.planos.length - 1);
     } else {
+      const planAux = data?.planos[nextIndex];
+
+      const featureAux = planAux?.caracteristicas.find((feature) => {
+        return feature.parcelas === (productSelected.parcels || 80);
+      });
+
+      setProductSelected({
+        ...productSelected,
+        value: featureAux?.valor,
+        planId: planAux?.id,
+        featuresId: featureAux?.id,
+        documentation: featureAux?.documentacao,
+      });
       setPlanIndex(nextIndex);
     }
   }
 
-  function handleNext() {
+  function handleNextPlan() {
     if (data?.planos) {
+      const planAux = data?.planos[(planIndex + 1) % data?.planos.length];
+
+      const featureAux = planAux.caracteristicas.find((feature) => {
+        return feature.parcelas === (productSelected.parcels || 80);
+      });
+
+      setProductSelected({
+        ...productSelected,
+        value: featureAux?.valor,
+        planId: planAux.id,
+        featuresId: featureAux?.id,
+        documentation: featureAux?.documentacao,
+      });
       setPlanIndex((planIndex + 1) % data?.planos.length);
     }
   }
@@ -68,6 +108,16 @@ const MotorcycleDetails: NextPage = () => {
         }
       });
     });
+  }
+
+  function navigateToGetData() {
+    console.log(productSelected);
+    // setProductSelected({
+    //   id: parseInt(id || "0"),
+    //   color: data?.cores[colorSelected].cor || "",
+    //   planId: 0,
+    //   featuresId: 0
+    // });
   }
 
   useEffect(() => {
@@ -107,7 +157,7 @@ const MotorcycleDetails: NextPage = () => {
 
         <div className="flex flex-col justify-center items-center text-center py-8 px-4">
           <h1 className="text-gray-800 text-2xl font-semibold">{data?.nome}</h1>
-          <form onChange={handerChangeColor}>
+          <form onChange={handleChangeColor}>
             <div className="space-x-1 py-4">
               {data?.cores.map((cor) => (
                 <ColorSelect
@@ -205,7 +255,7 @@ const MotorcycleDetails: NextPage = () => {
             <button
               type="button"
               className="flex absolute top-0 left-0 z-30 justify-center items-center px-4 h-full cursor-pointer group focus:outline-none"
-              onClick={handlePrev}
+              onClick={handlePrevPlan}
             >
               <span className="inline-flex justify-center items-center w-8 h-8 rounded-full sm:w-10 sm:h-10 bg-primary group-focus:ring-2 group-focus:ring-primary/50 group-focus:outline-none">
                 <svg
@@ -228,7 +278,7 @@ const MotorcycleDetails: NextPage = () => {
             <button
               type="button"
               className="flex absolute top-0 right-0 z-30 justify-center items-center px-4 h-full cursor-pointer group outline-none"
-              onClick={handleNext}
+              onClick={handleNextPlan}
             >
               <span className="inline-flex justify-center items-center w-8 h-8 rounded-full sm:w-10 sm:h-10 bg-primary group-focus:ring-2 group-focus:ring-primary/50 group-focus:outline-none">
                 <svg
@@ -251,12 +301,14 @@ const MotorcycleDetails: NextPage = () => {
           </div>
         </div>
 
-        <button
-          onClick={findIdealPlan}
-          className="fixed left-0 bottom-0 w-full py-4 bg-primary text-white text-lg font-semibold uppercase"
-        >
-          Adquira por {productSelected.value} por mês
-        </button>
+        {productSelected.value && (
+          <button
+            onClick={navigateToGetData}
+            className="fixed left-0 bottom-0 w-full py-4 bg-primary text-white text-lg font-semibold uppercase"
+          >
+            Adquira por {productSelected.value} por mês
+          </button>
+        )}
       </main>
 
       <Footer />

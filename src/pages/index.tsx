@@ -45,6 +45,7 @@ const Home: NextPage = () => {
     setProductSelected({
       id: moto.id,
       parcels: 80,
+      color: "#fff",
       documentation: false,
       value: getLowerPrice(moto.planos),
     });
