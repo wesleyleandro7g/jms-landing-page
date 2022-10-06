@@ -158,11 +158,11 @@ const MotorcycleDetails: NextPage = () => {
           <h1 className="text-gray-800 text-2xl font-semibold">{data?.nome}</h1>
           <form onChange={handleChangeColor}>
             <div className="space-x-1 py-4">
-              {data?.cores.map((cor) => (
+              {data?.cores.map((cor, index) => (
                 <ColorSelect
                   key={cor.id}
                   id={cor.cor}
-                  value={cor.id}
+                  value={index}
                   color={cor.hex}
                   name="color"
                 />
