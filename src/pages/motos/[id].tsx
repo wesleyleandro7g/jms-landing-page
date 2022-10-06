@@ -111,6 +111,11 @@ const MotorcycleDetails: NextPage = () => {
   }
 
   function navigateToGetData() {
+    setProductSelected({
+      ...productSelected,
+      color: data?.cores[colorSelected].hex,
+      colorName: data?.cores[colorSelected].cor,
+    });
     router.push("/dados");
   }
 

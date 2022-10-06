@@ -46,6 +46,7 @@ const Home: NextPage = () => {
       id: moto.id,
       parcels: 80,
       color: "#fff",
+      colorName: "Branca",
       documentation: false,
       value: getLowerPrice(moto.planos),
     });

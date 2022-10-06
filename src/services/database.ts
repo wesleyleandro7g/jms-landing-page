@@ -24,7 +24,7 @@ export const motos: Moto[] = [
     cores: [
       {
         id: 0,
-        cor: "Branco",
+        cor: "Branca",
         hex: "#fff",
         images: [BIZ_110_BRANCA_LA, BIZ_110_BRANCA_FD, BIZ_110_BRANCA_TD],
       },

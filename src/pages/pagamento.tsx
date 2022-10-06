@@ -6,7 +6,7 @@ const Payment: NextPage = () => {
   return (
     <div className="flex flex-col w-full overflow-scroll h-screen bg-secondary">
       <header className="flex justify-center space-x-6 items-center p-4">
-        <Link href="/motos">
+        <Link href="/dados">
           <h1 className="text-2xl italic font-black text-primary font-roboto">
             James Moto Shop
           </h1>
@@ -20,6 +20,17 @@ const Payment: NextPage = () => {
             Realize o pagamento da primeira parcela para prosseguir.
           </p>
         </div>
+
+        <div className="text-center">
+          <p className="text-gray-800 text-base">
+            Beneficiário:{" "}
+            <span className="font-bold">James Moto Shop LTDA</span>
+          </p>
+          <p className="text-gray-800 text-base">
+            CNPJ: <span className="font-bold">99.999.999/0001-99</span>
+          </p>
+        </div>
+
         <div className="flex flex-col justify-center items-center">
           <div className="border-4 border-primary-300 rounded-md p-2">
             <QRCode value="hey" />

@@ -1,3 +1,4 @@
+import React, { useContext, useEffect, useState } from "react";
 import { NextPage } from "next";
 import Link from "next/link";
 import Image from "next/image";
@@ -5,14 +6,27 @@ import { useRouter } from "next/router";
 import { FormHelpers } from "@unform/core";
 import { Form } from "@unform/web";
 
+import { PurchaseContext } from "../contexts/purchaseContext";
+
 import { InputText } from "../components/inputs/inputText";
 import { Footer } from "../components/footer";
 import { PrimaryButton } from "../components/button";
 
+import type { Moto } from "../types/moto";
+
 import biz from "../../public/images/motos/BIZ_110/BIZ_110_BRANCA_LA.png";
+import { motos } from "../services/database";
 
 const CostumerData: NextPage = () => {
   const router = useRouter();
+  const { productSelected } = useContext(PurchaseContext);
+  const [moto, setMoto] = useState<Moto>();
+
+  function handleMoto() {
+    const motoAux = motos.find((moto) => moto.id === productSelected.id);
+
+    setMoto(motoAux);
+  }
 
   function handleSubmit(data: FormData, { reset }: FormHelpers) {
     console.log(data);
@@ -20,6 +34,10 @@ const CostumerData: NextPage = () => {
     reset();
     router.push("/pagamento");
   }
+
+  useEffect(() => {
+    handleMoto();
+  }, []);
 
   return (
     <div className="flex flex-col w-full overflow-scroll h-screen bg-secondary">
@@ -50,12 +68,20 @@ const CostumerData: NextPage = () => {
       <main className="p-4">
         <div className="flex p-4 mb-4 bg-white rounded-md shadow-sm">
           <div className="w-1/2">
-            <h5 className="text-gray-800 text-xl font-semibold">Pop 110i</h5>
-            <h6 className="text-gray-600">Branca</h6>
-            <h6 className="text-gray-600">80x de 154.00</h6>
+            <h5 className="text-gray-800 text-xl font-semibold">
+              {moto?.nome}
+            </h5>
+            <h6 className="text-gray-600">{productSelected.colorName}</h6>
+            <h6 className="text-gray-600">
+              {productSelected.parcels} de {productSelected.value}
+            </h6>
           </div>
           <div className="relative w-1/2">
-            <Image src={biz} layout="fill" objectFit="contain" />
+            <Image
+              src={moto?.cores[0].images[0] || biz}
+              layout="fill"
+              objectFit="contain"
+            />
           </div>
         </div>
 

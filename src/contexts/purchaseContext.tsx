@@ -14,6 +14,7 @@ interface ProductProps {
   parcels?: number;
   documentation?: boolean;
   color?: string;
+  colorName?: string;
   value?: number;
   planId?: number;
   featuresId?: number;
