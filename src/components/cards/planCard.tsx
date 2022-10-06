@@ -79,7 +79,7 @@ export function PlanCard({ plan, selected }: PlanCardProps) {
           <div className="grid grid-cols-2 gap-2">
             <Radio
               name={`parcelas-${plan?.id}`}
-              fullW
+              fullw
               options={plan?.caracteristicas.map((feature) => {
                 return {
                   id: JSON.stringify(feature.parcelas),

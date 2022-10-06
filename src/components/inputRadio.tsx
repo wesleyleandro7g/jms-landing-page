@@ -5,7 +5,7 @@ import styles from "../styles/input.module.css";
 
 interface Props extends InputHTMLAttributes<HTMLInputElement> {
   name: string;
-  fullW?: boolean;
+  fullw?: boolean;
   options?: {
     id: string;
     value: string | number;
@@ -53,7 +53,7 @@ const Radio: React.FC<Props> = ({ name, options, ...rest }) => {
             htmlFor={option.id}
             key={option.id}
             className={styles.label}
-            style={{ width: rest.fullW ? "100%" : "" }}
+            style={{ width: rest.fullw ? "100%" : "" }}
           >
             {option.label}
           </label>

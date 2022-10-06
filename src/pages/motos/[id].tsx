@@ -29,7 +29,7 @@ const MotorcycleDetails: NextPage = () => {
   const { id }: QueryRouterProps = router.query;
   const [data, setData] = useState<Moto>();
   const [colorSelected, setColorSelected] = useState(0);
-  const [index, setIndex] = useState(1);
+  const [planIndex, setPlanIndex] = useState(0);
 
   function handerChangeColor() {
     const color = document.querySelector(
@@ -40,20 +40,39 @@ const MotorcycleDetails: NextPage = () => {
   }
 
   function handlePrev() {
-    const nextIndex = index - 1;
+    const nextIndex = planIndex - 1;
 
-    if (nextIndex < 0) {
-      // setIndex(images.length - 1);
+    if (nextIndex < 0 && data?.planos) {
+      setPlanIndex(data?.planos.length - 1);
     } else {
-      setIndex(nextIndex);
+      setPlanIndex(nextIndex);
     }
   }
 
   function handleNext() {
-    // setIndex((index + 1) % images.length);
+    if (data?.planos) {
+      setPlanIndex((planIndex + 1) % data?.planos.length);
+    }
+  }
+
+  function findIdealPlan() {
+    const moto = motos.find((moto) => moto.id === parseInt(id || "0"));
+
+    moto?.planos.map((plan, index) => {
+      return plan.caracteristicas.map((features) => {
+        if (
+          features.documentacao === productSelected.documentation &&
+          features.parcelas === productSelected.parcels
+        ) {
+          console.log(index);
+          setPlanIndex(index);
+        }
+      });
+    });
   }
 
   useEffect(() => {
+    findIdealPlan();
     setData(motos.find((moto) => moto.id === parseInt(id || "0")));
   }, [id]);
 
@@ -178,7 +197,10 @@ const MotorcycleDetails: NextPage = () => {
             Nossos <span className="text-primary">Planos</span>
           </h2>
           <div className="flex justify-center relative px-4">
-            <PlanCard key={data?.planos[0].id} plan={data?.planos[0]} />
+            <PlanCard
+              key={data?.planos[planIndex].id}
+              plan={data?.planos[planIndex]}
+            />
 
             <button
               type="button"
@@ -187,7 +209,7 @@ const MotorcycleDetails: NextPage = () => {
             >
               <span className="inline-flex justify-center items-center w-8 h-8 rounded-full sm:w-10 sm:h-10 bg-primary group-focus:ring-2 group-focus:ring-primary/50 group-focus:outline-none">
                 <svg
-                  className="w-5 h-5 text-white sm:w-6 sm:h-6 dark:text-gray-800"
+                  className="w-5 h-5 text-white sm:w-6 sm:h-6"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -229,7 +251,10 @@ const MotorcycleDetails: NextPage = () => {
           </div>
         </div>
 
-        <button className="fixed left-0 bottom-0 w-full py-4 bg-primary text-white text-lg font-semibold uppercase">
+        <button
+          onClick={findIdealPlan}
+          className="fixed left-0 bottom-0 w-full py-4 bg-primary text-white text-lg font-semibold uppercase"
+        >
           Adquira por {productSelected.value} por mês
         </button>
       </main>

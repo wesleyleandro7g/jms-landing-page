@@ -40,7 +40,7 @@ const Carousel: React.FC<CarouselProps> = ({ images }) => {
       >
         <span className="inline-flex justify-center items-center w-8 h-8 rounded-full sm:w-10 sm:h-10 bg-primary/30 group-hover:bg-primary/50 group-focus:ring-2 group-focus:ring-primary group-focus:outline-none">
           <svg
-            className="w-5 h-5 text-white sm:w-6 sm:h-6 dark:text-gray-800"
+            className="w-5 h-5 text-white sm:w-6 sm:h-6"
             fill="none"
             stroke="currentColor"
             viewBox="0 0 24 24"

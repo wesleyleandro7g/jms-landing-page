@@ -28,7 +28,13 @@ export const PurchaseContext = createContext<PurchaseContextInterface>({
 });
 
 const PurchaseProvider: React.FC<PurchaseProviderProps> = ({ children }) => {
-  const [productSelected, setProductSelected] = useState({} as ProductProps);
+  const [productSelected, setProductSelected] = useState<ProductProps>({
+    id: 0,
+    color: "#fff",
+    documentation: false,
+    parcels: 80,
+    value: 0,
+  });
 
   return (
     <PurchaseContext.Provider value={{ productSelected, setProductSelected }}>
