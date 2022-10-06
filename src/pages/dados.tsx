@@ -37,6 +37,7 @@ const CostumerData: NextPage = () => {
 
   useEffect(() => {
     handleMoto();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
@@ -81,6 +82,7 @@ const CostumerData: NextPage = () => {
               src={moto?.cores[0].images[0] || biz}
               layout="fill"
               objectFit="contain"
+              alt={moto?.nome}
             />
           </div>
         </div>
