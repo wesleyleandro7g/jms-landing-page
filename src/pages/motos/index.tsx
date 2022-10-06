@@ -5,7 +5,7 @@ import { useRouter } from "next/router";
 
 import { Footer } from "../../components/footer";
 import { ProductCard } from "../../components/cards/productCard";
-import { InputRange, InputRadio } from "../../components/inputs";
+import { InputRange, InputRadio } from "../../components/inputs/inputs";
 import { PrimaryButton } from "../../components/button";
 import Filter, { FilterHandles } from "../../components/filter";
 import { PurchaseContext } from "../../contexts/purchaseContext";

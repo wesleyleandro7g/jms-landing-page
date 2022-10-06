@@ -4,7 +4,7 @@ import { FormHelpers } from "@unform/core";
 import { Form } from "@unform/web";
 
 import { PurchaseContext } from "../../contexts/purchaseContext";
-import Radio from "../inputRadio";
+import Radio from "../inputs/inputRadio";
 import staticImagePlan from "../../../public/images/planos/VoudeHonda.png";
 
 import type { Plan } from "../../types/plan";

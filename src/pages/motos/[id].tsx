@@ -4,7 +4,7 @@ import Image from "next/image";
 import { NextPage } from "next";
 import { useRouter } from "next/router";
 
-import { ColorSelect } from "../../components/inputs";
+import { ColorSelect } from "../../components/inputs/inputs";
 import { Footer } from "../../components/footer";
 import { PlanCard } from "../../components/cards/planCard";
 import { PurchaseContext } from "../../contexts/purchaseContext";
@@ -111,13 +111,7 @@ const MotorcycleDetails: NextPage = () => {
   }
 
   function navigateToGetData() {
-    console.log(productSelected);
-    // setProductSelected({
-    //   id: parseInt(id || "0"),
-    //   color: data?.cores[colorSelected].cor || "",
-    //   planId: 0,
-    //   featuresId: 0
-    // });
+    router.push("/dados");
   }
 
   useEffect(() => {
