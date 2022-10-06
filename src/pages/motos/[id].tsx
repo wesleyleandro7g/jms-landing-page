@@ -64,7 +64,6 @@ const MotorcycleDetails: NextPage = () => {
           features.documentacao === productSelected.documentation &&
           features.parcelas === productSelected.parcels
         ) {
-          console.log(index);
           setPlanIndex(index);
         }
       });
@@ -74,6 +73,7 @@ const MotorcycleDetails: NextPage = () => {
   useEffect(() => {
     findIdealPlan();
     setData(motos.find((moto) => moto.id === parseInt(id || "0")));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id]);
 
   return (

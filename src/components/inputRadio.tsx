@@ -38,7 +38,7 @@ const Radio: React.FC<Props> = ({ name, options, ...rest }) => {
   return (
     <>
       {options?.map((option, index) => (
-        <div>
+        <div key={option.id}>
           <input
             ref={(ref) => ref && (inputRefs.current[index] = ref)}
             id={option.id}
