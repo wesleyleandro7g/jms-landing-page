@@ -310,7 +310,7 @@ const Motorcycles: NextPage = () => {
           </h6>
 
           <form id="parcels" onChange={renderParcelFilter}>
-            <div className="flex justify-between items-center gap-1 overflow-scroll">
+            <div className="grid grid-cols-3 gap-2">
               <InputRadio id="12x" value={12} name="parcel" />
               <InputRadio id="25x" value={25} name="parcel" />
               <InputRadio id="36x" value={36} name="parcel" />
@@ -326,7 +326,7 @@ const Motorcycles: NextPage = () => {
             Documentação inclusa
           </h6>
           <form id="documentation" onChange={renderParcelFilter}>
-            <div className="flex justify-start items-start gap-1">
+            <div className="flex justify-start items-start gap-2">
               <InputRadio id="Não" value="false" name="doc" />
               <InputRadio id="Sim" value="true" name="doc" />
             </div>

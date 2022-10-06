@@ -105,6 +105,7 @@
     color: #9C9B9B;
     text-align: center;
     background-color: transparent;
+    width: 100%;
 }
 .inputRadio:checked + .label {
     border-width: 2px;

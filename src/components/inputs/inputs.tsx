@@ -9,12 +9,12 @@ export function InputRange(props: InputProps) {
 
 export function InputRadio(props: InputProps) {
   return (
-    <>
+    <div>
       <input className={styles.inputRadio} type="radio" {...props} />
       <label className={styles.label} htmlFor={props.id}>
         {props.id}
       </label>
-    </>
+    </div>
   );
 }
 
