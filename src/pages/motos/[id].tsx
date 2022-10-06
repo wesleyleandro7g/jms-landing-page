@@ -10,7 +10,7 @@ import { PlanCard } from "../../components/cards/planCard";
 import { PurchaseContext } from "../../contexts/purchaseContext";
 import Carousel from "../../components/carousel";
 
-import { motos } from "../../services/database";
+import { motos } from "../../database";
 import motor from "../../../public/assets/motor.svg";
 import cilindrada from "../../../public/assets/cilindrada.svg";
 import transmissao from "../../../public/assets/transmissao.svg";
@@ -96,7 +96,7 @@ const MotorcycleDetails: NextPage = () => {
   }
 
   function findIdealPlan() {
-    const moto = motos.find((moto) => moto.id === parseInt(id || "0"));
+    const moto = motos.find((moto) => moto.id === id);
 
     moto?.planos.map((plan, index) => {
       return plan.caracteristicas.map((features) => {
@@ -121,7 +121,7 @@ const MotorcycleDetails: NextPage = () => {
 
   useEffect(() => {
     findIdealPlan();
-    setData(motos.find((moto) => moto.id === parseInt(id || "0")));
+    setData(motos.find((moto) => moto.id === id));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id]);
 

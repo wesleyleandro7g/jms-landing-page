@@ -15,7 +15,7 @@ import { PrimaryButton } from "../components/button";
 import type { Moto } from "../types/moto";
 
 import biz from "../../public/images/motos/BIZ_110/BIZ_110_BRANCA_LA.png";
-import { motos } from "../services/database";
+import { motos } from "../database";
 
 const CostumerData: NextPage = () => {
   const router = useRouter();

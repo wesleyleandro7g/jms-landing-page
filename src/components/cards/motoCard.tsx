@@ -3,7 +3,7 @@ import Image, { StaticImageData } from "next/image";
 import { PrimaryButton } from "../button";
 
 interface MotoCardProps {
-  id: number;
+  id: string;
   name: string;
   value: number;
   image: StaticImageData;

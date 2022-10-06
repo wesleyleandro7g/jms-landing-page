@@ -2,7 +2,7 @@ import { Color } from "./color";
 import { Plan } from "./plan";
 
 export type Moto = {
-  id: number;
+  id: string;
   nome: string;
   motor: string;
   cilindrada: string;

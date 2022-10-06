@@ -1,7 +1,7 @@
 import { StaticImageData } from "next/image";
 
 export type Color = {
-  id: number;
+  id: string;
   cor: string;
   hex: string;
   images: StaticImageData[];

@@ -10,14 +10,14 @@ interface PurchaseProviderProps {
 }
 
 interface ProductProps {
-  id: number;
+  id: string;
   parcels?: number;
   documentation?: boolean;
   color?: string;
   colorName?: string;
   value?: number;
-  planId?: number;
-  featuresId?: number;
+  planId?: string;
+  featuresId?: string;
 }
 
 interface PurchaseContextInterface {

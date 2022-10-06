@@ -10,7 +10,7 @@ import { PrimaryButton } from "../../components/button";
 import Filter, { FilterHandles } from "../../components/filter";
 import { PurchaseContext } from "../../contexts/purchaseContext";
 
-import { motos } from "../../services/database";
+import { motos } from "../../database";
 
 import { Plan } from "../../types/plan";
 import { Moto } from "../../types/moto";

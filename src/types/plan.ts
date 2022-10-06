@@ -2,7 +2,7 @@ import { StaticImageData } from "next/image";
 import { Feature } from "./feature";
 
 export type Plan = {
-  id: number;
+  id: string;
   nome: string;
   imagem: StaticImageData;
   caracteristicas: Feature[];

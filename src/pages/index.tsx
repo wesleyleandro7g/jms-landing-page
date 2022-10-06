@@ -15,7 +15,7 @@ import { MotoCard } from "../components/cards/motoCard";
 import { Accordion } from "../components/accordion";
 
 import questions from "../services/questions.json";
-import { motos } from "../services/database";
+import { motos } from "../database";
 import { PurchaseContext } from "../contexts/purchaseContext";
 
 import chevronDown from "../../public/assets/chevron-down.svg";

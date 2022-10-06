@@ -1,5 +1,5 @@
 export type Feature = {
-  id: number;
+  id: string;
   parcelas: number;
   valor: number;
   label: string;
