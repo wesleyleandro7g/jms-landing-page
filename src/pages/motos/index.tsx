@@ -131,13 +131,13 @@ const Motorcycles: NextPage = () => {
             setDocumentation(documentation.value === "true");
 
             return (
-              feature.parcelas <= +parcel.value &&
+              feature.parcelas === +parcel.value &&
               feature.documentacao === (documentation.value === "true")
             );
           } else if (parcel) {
             setParcels(+parcel.value);
 
-            return feature.parcelas <= +parcel.value;
+            return feature.parcelas === +parcel.value;
           } else if (documentation) {
             setDocumentation(documentation.value === "true");
 
