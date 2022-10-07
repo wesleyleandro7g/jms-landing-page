@@ -16,7 +16,7 @@ import CG_160_Start_Vermelha_LA from "/public/images/motos/CG_160_START/CG_160_S
 import CG_160_Start_Vermelha_TD from "/public/images/motos/CG_160_START/CG_160_Start_Vermelha_TD.png";
 import CG_160_Start_Vermelha_TE from "/public/images/motos/CG_160_START/CG_160_Start_Vermelha_TE.png";
 
-export const cg160start: Moto = {
+export const CG_160_START: Moto = {
   id: "4d674158-b340-45d9-a2c2-a903ecfd64ab",
   nome: "CG 160 START",
   motor: "OHC, Monocilíndrico, 4 tempos, arrefecido a ar",

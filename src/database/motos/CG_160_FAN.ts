@@ -16,7 +16,7 @@ import CG160Fan_Vermelha_FD_esq from "/public/images/motos/CG_160_FAN/CG160Fan_V
 import CG160Fan_Vermelha_TD_dir from "/public/images/motos/CG_160_FAN/CG160Fan_Vermelha_TD_dir.png";
 import CG160Fan_Vermelha_TD_esq from "/public/images/motos/CG_160_FAN/CG160Fan_Vermelha_TD_esq.png";
 
-export const cg160fan: Moto = {
+export const CG_160_FAN: Moto = {
   id: "63e3d92c-ec9f-449c-bc1d-d63d524a48d1",
   nome: "CG 160 FAN ESDI",
   motor: "OHC, Monocilíndrico 4 tempos, arrefecido a ar",

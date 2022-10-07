@@ -13,7 +13,7 @@ import BIZ_110_VERMELHA_LA from "/public/images/motos/BIZ_110/BIZ_110_VERMELHA_L
 import BIZ_110_VERMELHA_FD from "/public/images/motos/BIZ_110/BIZ_110_VERMELHA_FD.png";
 import BIZ_110_VERMELHA_TD from "/public/images/motos/BIZ_110/BIZ_110_VERMELHA_TD.png";
 
-export const biz110i: Moto = {
+export const BIZ_110i: Moto = {
   id: "656e912e-5e9b-4697-8e16-422b5f28447f",
   nome: "Biz 110i",
   motor: "OHC, Monocilíndrico 4 tempos, arrefecido a ar",

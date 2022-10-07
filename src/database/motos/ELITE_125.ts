@@ -10,7 +10,7 @@ import ELITE125_PRATAMETALICO_FD from "/public/images/motos/ELITE_125/ELITE125_p
 import ELITE125_PRATAMETALICO_TD_esq from "/public/images/motos/ELITE_125/ELITE125_pratametalico_TD_esq.png";
 import ELITE125_PRATAMETALICO_TD_dir from "/public/images/motos/ELITE_125/ELITE125_pratametalico_TD_dir.png";
 
-export const elite125: Moto = {
+export const ELITE_125: Moto = {
   id: "c0ff7ccc-6ec1-4146-9ee6-de9a6297baf1",
   nome: "Elite 125",
   motor: "OHC, Monocilíndrico 4 tempos, arrefecido a ar",
