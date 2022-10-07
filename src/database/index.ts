@@ -5,5 +5,13 @@ import { biz125 } from "./motos/biz125";
 import { elite125 } from "./motos/elite125";
 import { cg160start } from "./motos/cg160start";
 import { cg160fan } from "./motos/cg160fan";
+import { CG_160_TITAN } from "./motos/CG_160_TITAN";
 
-export const motos: Moto[] = [biz110i, biz125, elite125, cg160start, cg160fan];
+export const motos: Moto[] = [
+  biz110i,
+  biz125,
+  elite125,
+  cg160start,
+  cg160fan,
+  CG_160_TITAN,
+];
