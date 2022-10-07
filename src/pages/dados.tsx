@@ -74,7 +74,12 @@ const CostumerData: NextPage = () => {
             </h5>
             <h6 className="text-gray-600">{productSelected.colorName}</h6>
             <h6 className="text-gray-600">
-              {productSelected.parcels} de {productSelected.value}
+              {productSelected.parcels}x de{" "}
+              {Intl.NumberFormat("pt-BR", {
+                style: "currency",
+                currency: "BRL",
+                minimumFractionDigits: 2,
+              }).format(productSelected.value || 0)}
             </h6>
           </div>
           <div className="relative w-1/2">
