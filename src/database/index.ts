@@ -6,6 +6,7 @@ import { ELITE_125 } from "./motos/ELITE_125";
 import { CG_160_START } from "./motos/CG_160_START";
 import { CG_160_FAN } from "./motos/CG_160_FAN";
 import { CG_160_TITAN } from "./motos/CG_160_TITAN";
+import { PCX_STD_CBS } from "./motos/PCX_STD_CBS";
 
 export const motos: Moto[] = [
   BIZ_110i,
@@ -14,4 +15,5 @@ export const motos: Moto[] = [
   CG_160_START,
   CG_160_FAN,
   CG_160_TITAN,
+  PCX_STD_CBS,
 ];
