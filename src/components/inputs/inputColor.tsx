@@ -5,15 +5,14 @@ import styles from "../../styles/input.module.css";
 
 interface Props extends InputHTMLAttributes<HTMLInputElement> {
   name: string;
-  fullw?: boolean;
   options?: {
     id: string;
-    value: string | number;
-    label: string;
+    value: string;
+    color: string;
   }[];
 }
 
-const Radio: React.FC<Props> = ({ name, options, ...rest }) => {
+const InputColor: React.FC<Props> = ({ name, options, ...rest }) => {
   const inputRefs = useRef<HTMLInputElement[]>([]);
   const { fieldName, registerField, defaultValue = "" } = useField(name);
 
@@ -46,21 +45,19 @@ const Radio: React.FC<Props> = ({ name, options, ...rest }) => {
             name={name}
             defaultChecked={defaultValue.includes(option.id)}
             value={option.value}
-            className={styles.inputRadio}
+            className={styles.inputColor}
             {...rest}
           />
           <label
             htmlFor={option.id}
             key={option.id}
-            className={styles.label}
-            style={{ width: rest.fullw ? "100%" : "auto" }}
-          >
-            {option.label}
-          </label>
+            className={styles.inputColorLabel}
+            style={{ backgroundColor: option.color }}
+          ></label>
         </div>
       ))}
     </>
   );
 };
 
-export default Radio;
+export default InputColor;

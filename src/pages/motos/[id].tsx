@@ -1,14 +1,15 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { FormEvent, useContext, useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { NextPage } from "next";
 import { useRouter } from "next/router";
+import { Form } from "@unform/web";
 
-import { ColorSelect } from "../../components/inputs/inputs";
 import { Footer } from "../../components/footer";
-import { PlanCard } from "../../components/cards/planCard";
 import { PurchaseContext } from "../../contexts/purchaseContext";
 import Carousel from "../../components/carousel";
+import Radio from "../../components/inputs/inputRadio";
+import InputColor from "../../components/inputs/inputColor";
 
 import { motos } from "../../database";
 import motor from "../../../public/assets/motor.svg";
@@ -16,6 +17,7 @@ import cilindrada from "../../../public/assets/cilindrada.svg";
 import transmissao from "../../../public/assets/transmissao.svg";
 import partida from "../../../public/assets/partida.svg";
 import freios from "../../../public/assets/freios.svg";
+import biz from "../../../public/images/motos/BIZ_110/BIZ_110_BRANCA_LA.png";
 
 import type { Moto } from "../../types/moto";
 
@@ -23,105 +25,152 @@ interface QueryRouterProps {
   id?: string;
 }
 
+interface ParcelsProps {
+  id: string;
+  parcel: number;
+  label: string;
+}
+
+interface ColorsProps {
+  id: string;
+  name: string;
+  hex: string;
+}
+
 const MotorcycleDetails: NextPage = () => {
   const router = useRouter();
-  const { productSelected, setProductSelected } = useContext(PurchaseContext);
   const { id }: QueryRouterProps = router.query;
-  const [data, setData] = useState<Moto>();
-  const [colorSelected, setColorSelected] = useState(0);
-  const [planIndex, setPlanIndex] = useState(0);
+  const { productSelected, setProductSelected } = useContext(PurchaseContext);
+  const [moto, setMoto] = useState<Moto>();
+  const [parcels, setParcels] = useState<Array<ParcelsProps>>();
+  const [colors, setColors] = useState<Array<ColorsProps>>();
+
+  function handleParcels(withDoc: boolean) {
+    const parcelsArray: ParcelsProps[] = [];
+    const motoAux = motos.find((moto) => moto.id === id);
+
+    motoAux?.planos.map((plan) => {
+      plan.caracteristicas.map((feature) => {
+        if (feature.documentacao === withDoc) {
+          parcelsArray.push({
+            id: feature.id,
+            parcel: feature.parcelas,
+            label: feature.label,
+          });
+        }
+      });
+    });
+
+    parcelsArray.map((parcel) => {
+      if (parcel.parcel === productSelected.parcels) {
+        setProductSelected({
+          ...productSelected,
+          featuresId: parcel.id,
+        });
+      }
+    });
+
+    const parcelsOrdened = parcelsArray.sort((a, b) => {
+      return a.parcel < b.parcel ? -1 : a.parcel > b.parcel ? 1 : 0;
+    });
+
+    setParcels(parcelsOrdened);
+  }
+
+  function handleChangeDoc() {
+    const documentation = document.querySelector(
+      'input[name="doc"]:checked'
+    ) as HTMLInputElement;
+
+    handleParcels(documentation.value === "true");
+  }
+
+  function handleInitialColor() {
+    const colorsAux = motos.find((moto) => moto.id === id)?.cores;
+    const colorAux: ColorsProps[] = [];
+
+    colorsAux?.map((color) => {
+      colorAux.push({ id: color.id, name: color.cor, hex: color.hex });
+    });
+
+    if (colorsAux) {
+      setColors(colorAux);
+
+      setProductSelected({
+        ...productSelected,
+        colorId: colorsAux[0].id,
+        colorName: colorsAux[0].cor,
+        colorHex: colorsAux[0].hex,
+      });
+    }
+  }
 
   function handleChangeColor() {
-    const color = document.querySelector(
+    const element = document.querySelector(
       'input[name="color"]:checked'
     ) as HTMLInputElement;
 
-    setColorSelected(parseInt(color.value));
-  }
+    const colorAux = colors?.find((color) => color.id === element.id);
 
-  function handlePrevPlan() {
-    const nextIndex = planIndex - 1;
-
-    if (nextIndex < 0 && data?.planos) {
-      const planAux = data?.planos[data?.planos.length - 1];
-
-      const featureAux = planAux.caracteristicas.find((feature) => {
-        return feature.parcelas === (productSelected.parcels || 80);
-      });
-
+    if (colorAux) {
       setProductSelected({
         ...productSelected,
-        value: featureAux?.valor,
-        planId: planAux.id,
-        featuresId: featureAux?.id,
-        documentation: featureAux?.documentacao,
+        colorId: colorAux.id,
+        colorName: colorAux.name,
+        colorHex: colorAux.hex,
       });
-
-      setPlanIndex(data?.planos.length - 1);
-    } else {
-      const planAux = data?.planos[nextIndex];
-
-      const featureAux = planAux?.caracteristicas.find((feature) => {
-        return feature.parcelas === (productSelected.parcels || 80);
-      });
-
-      setProductSelected({
-        ...productSelected,
-        value: featureAux?.valor,
-        planId: planAux?.id,
-        featuresId: featureAux?.id,
-        documentation: featureAux?.documentacao,
-      });
-      setPlanIndex(nextIndex);
     }
   }
 
-  function handleNextPlan() {
-    if (data?.planos) {
-      const planAux = data?.planos[(planIndex + 1) % data?.planos.length];
+  function handleIdealPlan() {
+    const parcel = document.querySelector(
+      `input[name=parcelas]:checked`
+    ) as HTMLInputElement;
 
-      const featureAux = planAux.caracteristicas.find((feature) => {
-        return feature.parcelas === (productSelected.parcels || 80);
-      });
-
-      setProductSelected({
-        ...productSelected,
-        value: featureAux?.valor,
-        planId: planAux.id,
-        featuresId: featureAux?.id,
-        documentation: featureAux?.documentacao,
-      });
-      setPlanIndex((planIndex + 1) % data?.planos.length);
-    }
-  }
-
-  function findIdealPlan() {
-    const moto = motos.find((moto) => moto.id === id);
-
-    moto?.planos.map((plan, index) => {
-      return plan.caracteristicas.map((features) => {
+    moto?.planos.map((plan) => {
+      plan.caracteristicas.map((feature) => {
         if (
-          features.documentacao === productSelected.documentation &&
-          features.parcelas === productSelected.parcels
+          feature.parcelas === +parcel.value &&
+          feature.documentacao === productSelected.documentation
         ) {
-          setPlanIndex(index);
+          setProductSelected({
+            ...productSelected,
+            parcels: feature.parcelas,
+            value: feature.valor,
+            planId: plan.id,
+            featuresId: feature.id,
+          });
         }
       });
     });
   }
 
-  function navigateToGetData() {
-    setProductSelected({
-      ...productSelected,
-      color: data?.cores[colorSelected].hex,
-      colorName: data?.cores[colorSelected].cor,
+  function getColors() {
+    return colors?.map((color) => {
+      return {
+        id: color.id,
+        color: color.hex,
+        value: color.name,
+      };
     });
+  }
+
+  function getMotoImages() {
+    return (
+      moto?.cores.find((color) => color.id === productSelected.colorId)
+        ?.images || []
+    );
+  }
+
+  function navigateToGetData() {
     router.push("/dados");
   }
 
   useEffect(() => {
-    findIdealPlan();
-    setData(motos.find((moto) => moto.id === id));
+    handleParcels(productSelected.documentation || false);
+    setMoto(motos.find((moto) => moto.id === id));
+    handleInitialColor();
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id]);
 
@@ -152,23 +201,15 @@ const MotorcycleDetails: NextPage = () => {
       </header>
 
       <main className="py-4 relative">
-        <Carousel images={data?.cores[colorSelected].images || []} />
+        <Carousel images={getMotoImages()} />
 
         <div className="flex flex-col justify-center items-center text-center py-8 px-4">
-          <h1 className="text-gray-800 text-2xl font-semibold">{data?.nome}</h1>
-          <form onChange={handleChangeColor}>
-            <div className="space-x-1 py-4">
-              {data?.cores.map((cor, index) => (
-                <ColorSelect
-                  key={cor.id}
-                  id={cor.cor}
-                  value={index}
-                  color={cor.hex}
-                  name="color"
-                />
-              ))}
+          <h1 className="text-gray-800 text-2xl font-semibold">{moto?.nome}</h1>
+          <Form onSubmit={() => {}} onChange={handleChangeColor}>
+            <div className="flex space-x-1 py-4">
+              <InputColor name="color" options={getColors()} />
             </div>
-          </form>
+          </Form>
         </div>
 
         <div className="space-y-16 px-4">
@@ -181,7 +222,7 @@ const MotorcycleDetails: NextPage = () => {
               />
             </div>
             <h3 className="text-lg text-gray-800 font-bold mt-4">Motor</h3>
-            <p className="text-base text-gray-800 leading-5">{data?.motor}</p>
+            <p className="text-base text-gray-800 leading-5">{moto?.motor}</p>
           </div>
 
           <div className="flex flex-col items-center text-center">
@@ -194,7 +235,7 @@ const MotorcycleDetails: NextPage = () => {
             </div>
             <h3 className="text-lg text-gray-800 font-bold mt-4">Cilindrada</h3>
             <p className="text-base text-gray-800 leading-5">
-              {data?.cilindrada}
+              {moto?.cilindrada}
             </p>
           </div>
 
@@ -210,7 +251,7 @@ const MotorcycleDetails: NextPage = () => {
               Transmissão
             </h3>
             <p className="text-base text-gray-800 leading-5">
-              {data?.transmissao}
+              {moto?.transmissao}
             </p>
           </div>
 
@@ -225,7 +266,7 @@ const MotorcycleDetails: NextPage = () => {
             <h3 className="text-lg text-gray-800 font-bold mt-4">
               Sistema de Partida
             </h3>
-            <p className="text-base text-gray-800 leading-5">{data?.partida}</p>
+            <p className="text-base text-gray-800 leading-5">{moto?.partida}</p>
           </div>
 
           <div className="flex flex-col items-center text-center">
@@ -237,66 +278,97 @@ const MotorcycleDetails: NextPage = () => {
               />
             </div>
             <h3 className="text-lg text-gray-800 font-bold mt-4">Freios</h3>
-            <p className="text-base text-gray-800 leading-5">{data?.freios}</p>
+            <p className="text-base text-gray-800 leading-5">{moto?.freios}</p>
           </div>
         </div>
 
-        <div className="my-16 space-y-4">
-          <h2 className="text-3xl text-center text-black-800 font-bold">
-            Nossos <span className="text-primary">Planos</span>
-          </h2>
-          <div className="flex justify-center relative px-4">
-            <PlanCard
-              key={data?.planos[planIndex].id}
-              plan={data?.planos[planIndex]}
-            />
+        <div className="p-4 mx-4 my-8 bg-white rounded-md shadow-sm space-y-8">
+          <div>
+            <div className="relative w-full min-h-[150px]">
+              <Image
+                src={getMotoImages()[0]?.src || biz}
+                layout="fill"
+                objectFit="contain"
+                alt={moto?.nome}
+              />
+            </div>
+            <div className="flex flex-col w-full text-center my-4">
+              <h3 className="text-primary-300 text-2xl font-semibold text-center">
+                {moto?.nome}
+              </h3>
+              <p className="text-gray-600">{productSelected.colorName}</p>
+            </div>
+          </div>
 
-            <button
-              type="button"
-              className="flex absolute top-0 left-0 z-30 justify-center items-center px-4 h-full cursor-pointer group focus:outline-none"
-              onClick={handlePrevPlan}
-            >
-              <span className="inline-flex justify-center items-center w-8 h-8 rounded-full sm:w-10 sm:h-10 bg-primary group-focus:ring-2 group-focus:ring-primary/50 group-focus:outline-none">
-                <svg
-                  className="w-5 h-5 text-white sm:w-6 sm:h-6"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M15 19l-7-7 7-7"
-                  ></path>
-                </svg>
-                <span className="hidden">Previous</span>
-              </span>
-            </button>
-            <button
-              type="button"
-              className="flex absolute top-0 right-0 z-30 justify-center items-center px-4 h-full cursor-pointer group outline-none"
-              onClick={handleNextPlan}
-            >
-              <span className="inline-flex justify-center items-center w-8 h-8 rounded-full sm:w-10 sm:h-10 bg-primary group-focus:ring-2 group-focus:ring-primary/50 group-focus:outline-none">
-                <svg
-                  className="w-5 h-5 text-white sm:w-6 sm:h-6 "
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M9 5l7 7-7 7"
-                  ></path>
-                </svg>
-                <span className="hidden">Next</span>
-              </span>
-            </button>
+          <div className="flex flex-col justify-between items-center w-full space-y-8">
+            <div className="flex flex-col w-full gap-4">
+              <h6 className="text-lg text-gray-800 font-semibold">
+                Com documentação:
+              </h6>
+              <Form
+                id="documentation"
+                onSubmit={() => {}}
+                onChange={handleChangeDoc}
+                initialData={{ doc: productSelected.documentation ? "1" : "0" }}
+              >
+                <div className="flex justify-start items-start gap-2">
+                  <Radio
+                    name="doc"
+                    fullw
+                    options={[
+                      { id: "0", label: "Não", value: "false" },
+                      { id: "1", label: "Sim", value: "true" },
+                    ]}
+                  />
+                </div>
+              </Form>
+            </div>
+
+            <div className="flex flex-col w-full gap-4">
+              <h6 className="text-lg text-gray-800 font-semibold">
+                Número de parcelas:
+              </h6>
+              <Form
+                onSubmit={() => {}}
+                onChange={handleIdealPlan}
+                initialData={{
+                  parcelas: productSelected.featuresId || JSON.stringify(80),
+                }}
+              >
+                <div className="grid grid-cols-3 gap-2">
+                  <Radio
+                    name="parcelas"
+                    fullw
+                    options={parcels?.map((parcel) => {
+                      return {
+                        id: parcel.id,
+                        label: parcel.label,
+                        value: parcel.parcel,
+                      };
+                    })}
+                  />
+                </div>
+              </Form>
+            </div>
+
+            {/* <div className="flex flex-col w-full gap-4">
+              <h6 className="text-lg text-gray-800 font-semibold">Cor:</h6>
+
+              <Form onSubmit={() => {}} onChange={handleChangeColor}>
+                <div className="flex flex-wrap gap-2">
+                  <Radio
+                    name="color"
+                    options={colors?.map((color) => {
+                      return {
+                        id: color.id,
+                        label: color.name,
+                        value: color.id,
+                      };
+                    })}
+                  />
+                </div>
+              </Form>
+            </div> */}
           </div>
         </div>
 

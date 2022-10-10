@@ -43,7 +43,7 @@ const CostumerData: NextPage = () => {
   return (
     <div className="flex flex-col w-full overflow-scroll h-screen bg-secondary">
       <header className="flex justify-start space-x-6 items-center p-4 bg-white shadow-sm">
-        <Link href="/motos">
+        <Link href={`/motos/${productSelected.id}`}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             className="w-7 h-7 text-primary"

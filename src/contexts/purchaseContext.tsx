@@ -13,7 +13,8 @@ interface ProductProps {
   id: string;
   parcels?: number;
   documentation?: boolean;
-  color?: string;
+  colorId?: string;
+  colorHex?: string;
   colorName?: string;
   value?: number;
   planId?: string;

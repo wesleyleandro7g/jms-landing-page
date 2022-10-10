@@ -91,7 +91,7 @@ export const ELITE_125: Moto = {
           seguro: 4.73,
           contemplacoes: 12,
           documentacao: false,
-          label: "12x",
+          label: "60x",
           credito: 13002,
         },
         {
