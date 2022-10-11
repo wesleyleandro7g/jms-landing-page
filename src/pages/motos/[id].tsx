@@ -214,77 +214,77 @@ const MotorcycleDetails: NextPage = () => {
 
         <div className="space-y-16 px-4">
           <div className="flex flex-col items-center text-center">
-            <div className="w-1/2">
+            <div className="w-1/3">
               <Image
                 src={motor}
                 layout="responsive"
                 alt="Ícone ilustrando um motor"
               />
             </div>
-            <h3 className="text-lg text-gray-800 font-bold mt-4">Motor</h3>
-            <p className="text-base text-gray-800 leading-5">{moto?.motor}</p>
+            <h3 className="text-xl text-gray-800 font-bold mt-4">Motor</h3>
+            <p className="text-lg text-gray-800 leading-5">{moto?.motor}</p>
           </div>
 
           <div className="flex flex-col items-center text-center">
-            <div className="w-1/2">
+            <div className="w-1/3">
               <Image
                 src={cilindrada}
                 layout="responsive"
                 alt="Ícone ilustrando as cilindradas da moto"
               />
             </div>
-            <h3 className="text-lg text-gray-800 font-bold mt-4">Cilindrada</h3>
-            <p className="text-base text-gray-800 leading-5">
+            <h3 className="text-xl text-gray-800 font-bold mt-4">Cilindrada</h3>
+            <p className="text-lg text-gray-800 leading-5">
               {moto?.cilindrada}
             </p>
           </div>
 
           <div className="flex flex-col items-center text-center">
-            <div className="w-1/2">
+            <div className="w-1/3">
               <Image
                 src={transmissao}
                 layout="responsive"
                 alt="Ícone ilustrando a transmissão da moto"
               />
             </div>
-            <h3 className="text-lg text-gray-800 font-bold mt-4">
+            <h3 className="text-xl text-gray-800 font-bold mt-4">
               Transmissão
             </h3>
-            <p className="text-base text-gray-800 leading-5">
+            <p className="text-lg text-gray-800 leading-5">
               {moto?.transmissao}
             </p>
           </div>
 
           <div className="flex flex-col items-center text-center">
-            <div className="w-1/2">
+            <div className="w-1/3">
               <Image
                 src={partida}
                 layout="responsive"
                 alt="Ícone ilustrando o tipo de partida da moto"
               />
             </div>
-            <h3 className="text-lg text-gray-800 font-bold mt-4">
+            <h3 className="text-xl text-gray-800 font-bold mt-4">
               Sistema de Partida
             </h3>
-            <p className="text-base text-gray-800 leading-5">{moto?.partida}</p>
+            <p className="text-lg text-gray-800 leading-5">{moto?.partida}</p>
           </div>
 
           <div className="flex flex-col items-center text-center">
-            <div className="w-1/2">
+            <div className="w-1/3">
               <Image
                 src={freios}
                 layout="responsive"
                 alt="Ícone ilustrando o tipo de freios da moto"
               />
             </div>
-            <h3 className="text-lg text-gray-800 font-bold mt-4">Freios</h3>
-            <p className="text-base text-gray-800 leading-5">{moto?.freios}</p>
+            <h3 className="text-xl text-gray-800 font-bold mt-4">Freios</h3>
+            <p className="text-lg text-gray-800 leading-5">{moto?.freios}</p>
           </div>
         </div>
 
-        <div className="p-4 mx-4 my-8 bg-white rounded-md shadow-sm space-y-8">
+        <div className="p-4 mx-4 my-16 bg-white rounded-md shadow-md space-y-8">
           <div>
-            <div className="relative w-full min-h-[150px]">
+            <div className="relative w-full min-h-[200px]">
               <Image
                 src={getMotoImages()[0]?.src || biz}
                 layout="fill"
@@ -348,25 +348,6 @@ const MotorcycleDetails: NextPage = () => {
                 </div>
               </Form>
             </div>
-
-            {/* <div className="flex flex-col w-full gap-4">
-              <h6 className="text-lg text-gray-800 font-semibold">Cor:</h6>
-
-              <Form onSubmit={() => {}} onChange={handleChangeColor}>
-                <div className="flex flex-wrap gap-2">
-                  <Radio
-                    name="color"
-                    options={colors?.map((color) => {
-                      return {
-                        id: color.id,
-                        label: color.name,
-                        value: color.id,
-                      };
-                    })}
-                  />
-                </div>
-              </Form>
-            </div> */}
           </div>
         </div>
 
