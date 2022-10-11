@@ -73,14 +73,14 @@ export function PlanCard({ plan }: PlanCardProps) {
           onSubmit={handleSubmit}
           onChange={handleFilter}
           initialData={{
-            [`parcelas-${plan?.id}`]: JSON.stringify(
+            [`parcela-${plan?.id}`]: JSON.stringify(
               productSelected.parcels || 80
             ),
           }}
         >
           <div className="grid grid-cols-2 gap-2">
             <Radio
-              name={`parcelas-${plan?.id}`}
+              name={`parcela-${plan?.id}`}
               fullw
               options={plan?.caracteristicas.map((feature) => {
                 return {

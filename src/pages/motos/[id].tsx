@@ -1,4 +1,4 @@
-import React, { FormEvent, useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { NextPage } from "next";
@@ -331,9 +331,7 @@ const MotorcycleDetails: NextPage = () => {
               <Form
                 onSubmit={() => {}}
                 onChange={handleIdealPlan}
-                initialData={{
-                  parcelas: productSelected.featuresId || JSON.stringify(80),
-                }}
+                initialData={{ parcelas: productSelected.featuresId }}
               >
                 <div className="grid grid-cols-3 gap-2">
                   <Radio

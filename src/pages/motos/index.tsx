@@ -163,11 +163,30 @@ const Motorcycles: NextPage = () => {
   }
 
   function navigateToProduct(moto: Moto) {
-    setProductSelected({
-      id: moto.id,
-      parcels: parcels,
-      documentation: documentation,
-      value: getLowerPrice(moto.planos),
+    const parcelsArray: { id: string; parcels: number }[] = [];
+    const motoAux = motos.find((item) => item.id === moto.id);
+
+    motoAux?.planos.map((plan) => {
+      plan.caracteristicas.map((feature) => {
+        if (feature.documentacao === documentation) {
+          parcelsArray.push({
+            id: feature.id,
+            parcels: feature.parcelas,
+          });
+        }
+      });
+    });
+
+    parcelsArray.map((parcel) => {
+      if (parcel.parcels === parcels) {
+        setProductSelected({
+          id: moto.id,
+          parcels: parcels,
+          featuresId: parcel.id,
+          documentation: documentation,
+          value: getLowerPrice(moto.planos),
+        });
+      }
     });
 
     router.push(`/motos/${moto.id}`);
