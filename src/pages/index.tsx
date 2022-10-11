@@ -42,13 +42,31 @@ const Home: NextPage = () => {
   }
 
   function navigateToProduct(moto: Moto) {
-    setProductSelected({
-      id: moto.id,
-      parcels: 80,
-      color: "#fff",
-      colorName: "Branca",
-      documentation: false,
-      value: getLowerPrice(moto.planos),
+    const parcelsArray: { id: string; parcels: number }[] = [];
+
+    moto?.planos.map((plan) => {
+      plan.caracteristicas.map((feature) => {
+        if (feature.documentacao === false) {
+          parcelsArray.push({
+            id: feature.id,
+            parcels: feature.parcelas,
+          });
+        }
+      });
+    });
+
+    parcelsArray.map((parcel) => {
+      if (parcel.parcels === 80) {
+        setProductSelected({
+          id: moto.id,
+          parcels: 80,
+          featuresId: parcel.id,
+          documentation: false,
+          colorHex: "#fff",
+          colorName: "Branca",
+          value: getLowerPrice(moto.planos),
+        });
+      }
     });
 
     router.push(`/motos/${moto.id}`);
