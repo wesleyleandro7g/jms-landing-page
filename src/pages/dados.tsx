@@ -13,18 +13,33 @@ import { Footer } from "../components/footer";
 import { PrimaryButton } from "../components/button";
 
 import type { Moto } from "../types/moto";
+import type { Color } from "../types/color";
+import type { Plan } from "../types/plan";
 
-import biz from "../../public/images/motos/BIZ_110/BIZ_110_BRANCA_LA.png";
 import { motos } from "../database";
+import biz from "../../public/images/motos/BIZ_110/BIZ_110_BRANCA_LA.png";
 
 const CostumerData: NextPage = () => {
   const router = useRouter();
   const { productSelected } = useContext(PurchaseContext);
   const [moto, setMoto] = useState<Moto>();
+  const [color, setColor] = useState<Color>();
+  const [plan, setPlan] = useState<Plan>();
+  const [moreDetails, setMoreDetails] = useState(false);
 
   function handleMoto() {
     const motoAux = motos.find((moto) => moto.id === productSelected.id);
 
+    const colorAux = motoAux?.cores.find(
+      (color) => color.id === productSelected.colorId
+    );
+
+    const planAux = motoAux?.planos.find(
+      (plan) => plan.id === productSelected.planId
+    );
+
+    setPlan(planAux);
+    setColor(colorAux);
     setMoto(motoAux);
   }
 
@@ -67,28 +82,52 @@ const CostumerData: NextPage = () => {
       </header>
 
       <main className="p-4">
-        <div className="flex p-4 mb-4 bg-white rounded-md shadow-sm">
-          <div className="w-1/2">
-            <h5 className="text-gray-800 text-xl font-semibold">
-              {moto?.nome}
-            </h5>
-            <h6 className="text-gray-600">{productSelected.colorName}</h6>
-            <h6 className="text-gray-600">
-              {productSelected.parcels}x de{" "}
-              {Intl.NumberFormat("pt-BR", {
-                style: "currency",
-                currency: "BRL",
-                minimumFractionDigits: 2,
-              }).format(productSelected.value || 0)}
-            </h6>
+        <div className="p-4 mb-4 bg-white rounded-md shadow-md">
+          <div className="flex ">
+            <div className="w-2/3">
+              <h5 className="text-gray-800 text-xl font-semibold">
+                {moto?.nome}
+              </h5>
+              <h6 className="text-gray-600">
+                {productSelected.parcels}x de{" "}
+                {Intl.NumberFormat("pt-BR", {
+                  style: "currency",
+                  currency: "BRL",
+                  minimumFractionDigits: 2,
+                }).format(productSelected.value || 0)}
+              </h6>
+            </div>
+            <div className="relative w-1/3 min-h-[60px]">
+              <Image
+                src={color?.images[0].src || biz}
+                layout="fill"
+                objectFit="contain"
+                alt={moto?.nome}
+              />
+            </div>
           </div>
-          <div className="relative w-1/2">
-            <Image
-              src={moto?.cores[0].images[0] || biz}
-              layout="fill"
-              objectFit="contain"
-              alt={moto?.nome}
-            />
+          <div>
+            {moreDetails && (
+              <div>
+                <h6 className="text-gray-600">
+                  <span className="font-bold">Documentação: </span>
+                  {productSelected.documentation ? "Sim" : "Não"}
+                </h6>
+                <h6 className="text-gray-600">
+                  <span className="font-bold">Cor:</span>{" "}
+                  {productSelected.colorName}
+                </h6>
+                <h6 className="text-gray-600">
+                  <span className="font-bold">Plano:</span> {plan?.nome}
+                </h6>
+              </div>
+            )}
+            <button
+              onClick={() => setMoreDetails(!moreDetails)}
+              className="text-primary text-xs underline"
+            >
+              {moreDetails ? "Menos detalhes" : "Mais detalhes"}
+            </button>
           </div>
         </div>
 
