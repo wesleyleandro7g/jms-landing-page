@@ -65,6 +65,8 @@ const MotorcycleDetails: NextPage = () => {
       if (parcel.parcel === productSelected.parcels) {
         setProductSelected({
           ...productSelected,
+          value: undefined,
+          documentation: withDoc,
           featuresId: parcel.id,
         });
       }
@@ -126,6 +128,8 @@ const MotorcycleDetails: NextPage = () => {
     const parcel = document.querySelector(
       `input[name=parcelas]:checked`
     ) as HTMLInputElement;
+
+    console.log({ Documentação: productSelected.documentation });
 
     moto?.planos.map((plan) => {
       plan.caracteristicas.map((feature) => {
@@ -351,12 +355,19 @@ const MotorcycleDetails: NextPage = () => {
           </div>
         </div>
 
-        {productSelected.value && (
+        {productSelected.value ? (
           <button
             onClick={navigateToGetData}
             className="fixed left-0 bottom-0 w-full py-4 bg-primary text-white text-lg font-semibold uppercase"
           >
             Adquira por {productSelected.value} por mês
+          </button>
+        ) : (
+          <button
+            disabled
+            className="fixed left-0 bottom-0 w-full py-4 bg-gray-800 text-white text-lg font-semibold uppercase"
+          >
+            Selecione as parcelas
           </button>
         )}
       </main>
